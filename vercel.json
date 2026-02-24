@@ -2,16 +2,40 @@
     "version": 2,
     "rewrites": [
         {
-            "source": "/api/stats/(.*)",
+            "source": "/python-api/(.*)",
             "destination": "/dine-spot-backend/dashboard_analytics.py"
+        },
+        {
+            "source": "/login",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/signup",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/check-availability",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/reserve-table",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/my-reservations",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/restaurants",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/admin/(.*)",
+            "destination": "/dine-spot-backend/server.js"
         },
         {
             "source": "/api/(.*)",
             "destination": "/dine-spot-backend/server.js"
-        },
-        {
-            "source": "/(.*)",
-            "destination": "/$1"
         }
     ]
 }

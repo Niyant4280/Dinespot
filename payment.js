@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ── Call backend to mark table as booked ──
     if (token && reservationDetails.table) {
       try {
-        const res = await fetch('http://localhost:5000/reserve-table', {
+        const res = await fetch(`${window.API_BASE_URL}/reserve-table`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

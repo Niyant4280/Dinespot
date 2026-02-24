@@ -7,11 +7,11 @@
 // ── API Configuration ──
 window.API_BASE_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
     ? 'http://localhost:5000'
-    : ''; // Relative path for production
+    : ''; // Relative to root for Node
 
 window.STATS_API_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
     ? 'http://localhost:5001'
-    : ''; // Relative path for production
+    : '/python-api'; // Use /python-api prefix for Vercel routing
 
 // ── Get current user ──
 window.getUser = function () {

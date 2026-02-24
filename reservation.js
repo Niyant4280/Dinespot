@@ -26,7 +26,7 @@ document.getElementById('reservation-form').addEventListener('submit', function 
     localStorage.setItem('reservationDetails', JSON.stringify(reservationDetails));
     window.location.href = 'payment.html';
 });
-fetch("http://localhost:5000/reserve", {
+fetch(`${window.API_BASE_URL}/reserve`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

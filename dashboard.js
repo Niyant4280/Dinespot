@@ -33,7 +33,7 @@
     // Load reservation count from backend
     const token = user.token;
     if (token) {
-        fetch('http://localhost:5000/my-reservations', {
+        fetch(`${window.API_BASE_URL}/my-reservations`, {
             headers: { Authorization: `Bearer ${token}` }
         })
             .then(r => r.json())

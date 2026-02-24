@@ -9,6 +9,7 @@
     content="Create a DineSpot account and start reserving tables at 500+ premium restaurants across India in seconds.">
   <link rel="stylesheet" href="loginsignup.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="auth-guard.js"></script>
 </head>
 
 <body>
@@ -228,7 +229,7 @@
       errorBanner.classList.remove('show');
 
       try {
-        const response = await fetch('http://localhost:5000/signup', {
+        const response = await fetch(`${window.API_BASE_URL}/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password, username: name }),
@@ -238,7 +239,7 @@
 
         if (response.ok) {
           // Auto-login after signup
-          const loginRes = await fetch('http://localhost:5000/login', {
+          const loginRes = await fetch(`${window.API_BASE_URL}/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),

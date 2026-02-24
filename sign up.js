@@ -38,7 +38,7 @@
         }
 
         try {
-            const response = await fetch('http://localhost:5000/signup', {
+            const response = await fetch(`${window.API_BASE_URL}/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, email, password }),
@@ -48,7 +48,7 @@
 
             if (response.ok) {
                 // Auto-login
-                const loginRes = await fetch('http://localhost:5000/login', {
+                const loginRes = await fetch(`${window.API_BASE_URL}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password }),

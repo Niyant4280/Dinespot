@@ -9,6 +9,7 @@
     content="Sign in to your DineSpot account to manage reservations, view booking history, and discover premium dining.">
   <link rel="stylesheet" href="loginsignup.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="auth-guard.js"></script>
 </head>
 
 <body>
@@ -161,7 +162,7 @@
       errorBanner.classList.remove('show');
 
       try {
-        const response = await fetch('http://localhost:5000/login', {
+        const response = await fetch(`${window.API_BASE_URL}/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
