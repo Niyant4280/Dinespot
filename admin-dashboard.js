@@ -51,6 +51,11 @@ async function fetchStats() {
         const res = await fetch(`${window.API_BASE_URL}/admin/reservations`, {
             headers: { 'Authorization': `Bearer ${user.token}` }
         });
+        if (res.status === 401) {
+            console.error('Unauthorized - Redirecting to login');
+            window.location.href = 'login.html';
+            return;
+        }
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const reservations = data.reservations || [];

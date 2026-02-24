@@ -9,22 +9,8 @@ document.querySelector("form").addEventListener("submit", async function (event)
         return;
     }
 
-    // ── ADMIN LOGIN CHECK ──
-    // ── ADMIN LOGIN CHECK ──
-    // Case-insensitive email check
-    if (email.toLowerCase() === "admin@dinespot.com" && password === "admin123") {
-        console.log("Admin login detected - Redirecting...");
-        localStorage.setItem("user", JSON.stringify({
-            username: "Admin",
-            email: email,
-            role: "admin",
-            token: "admin-token-123" // Mock token for admin
-        }));
+    // All logins now go through the server to ensure valid JWT tokens
 
-        // Force redirect
-        window.location.replace("admin-dashboard.html");
-        return;
-    }
 
     try {
         const response = await fetch(`${window.API_BASE_URL}/login`, {
