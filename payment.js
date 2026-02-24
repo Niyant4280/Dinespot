@@ -105,15 +105,22 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (!res.ok) {
-          const err = await res.json();
-          // Table already booked by someone else
+          let errorText = '';
+          try {
+            const err = await res.json();
+            errorText = err.error || 'Server error';
+          } catch (e) {
+            const raw = await res.text();
+            errorText = `Non-JSON response (Status: ${res.status}): ${raw.slice(0, 100)}...`;
+          }
+
           if (res.status === 409) {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-            alert(`⚠️ Sorry! Table ${reservationDetails.table} was just booked by someone else. Please go back and select a different table.`);
+            alert(`⚠️ Sorry! Table ${reservationDetails.table} was just booked by someone else.`);
             return;
           }
-          throw new Error(err.error || 'Server error during reservation');
+          throw new Error(errorText);
         }
       } catch (err) {
         console.error('Reservation failed:', err);

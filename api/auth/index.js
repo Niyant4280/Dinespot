@@ -216,6 +216,7 @@ app.post('/hold-table', authMiddleware, async (req, res) => {
 
 // ── RESERVE TABLE ──
 app.post('/reserve-table', authMiddleware, async (req, res) => {
+    console.log(`[RESERVE] Incoming request from ${req.user.email} for ${req.body.restaurant} on ${req.body.date}`);
     try {
         const { tableId, restaurant, date, time, guests, totalCost, holdId } = req.body;
         if (!tableId || !restaurant || !date || !time)
@@ -245,6 +246,7 @@ app.post('/reserve-table', authMiddleware, async (req, res) => {
             return { reservationId: resRef.id };
         });
 
+        console.log(`[RESERVE] Successfully created reservation ${result.reservationId}`);
         res.json({ message: `Table ${tableId} booked successfully at ${restaurant}`, reservationId: result.reservationId });
     } catch (error) {
         if (error.message === 'HOLD_EXPIRED') return res.status(410).json({ error: 'Session expired. Please select the table again.' });
