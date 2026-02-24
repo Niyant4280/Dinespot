@@ -105,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         if (!res.ok) {
+          const rawText = await res.text();
           let errorText = '';
           try {
-            const err = await res.json();
+            const err = JSON.parse(rawText);
             errorText = err.error || 'Server error';
           } catch (e) {
-            const raw = await res.text();
-            errorText = `Non-JSON response (Status: ${res.status}): ${raw.slice(0, 100)}...`;
+            errorText = `Non-JSON response (Status: ${res.status}): ${rawText.slice(0, 100)}...`;
           }
 
           if (res.status === 409) {
