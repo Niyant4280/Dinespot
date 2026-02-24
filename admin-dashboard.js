@@ -52,7 +52,8 @@ async function fetchStats() {
             headers: { 'Authorization': `Bearer ${user.token}` }
         });
         if (res.status === 401) {
-            console.error('Unauthorized - Redirecting to login');
+            console.error('Unauthorized - Clearing storage and redirecting');
+            localStorage.removeItem('user');
             window.location.href = 'login.html';
             return;
         }

@@ -132,17 +132,8 @@
       const errorMsg = document.getElementById('errorMsg');
       const btn = document.getElementById('submitBtn');
 
-      // ── ADMIN LOGIN CHECK (offline shortcut) ──
-      if (email.toLowerCase() === "admin@dinespot.com" && password === "admin123") {
-        localStorage.setItem('user', JSON.stringify({
-          username: "Admin",
-          email: "admin@dinespot.com",
-          role: "admin",
-          token: "admin-token-123"
-        }));
-        window.location.replace("admin-dashboard.html");
-        return;
-      }
+      // All logins now go through the server
+
 
       // Validate
       let valid = true;
