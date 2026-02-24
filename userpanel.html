@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile — DineSpot</title>
+    <meta name="description" content="Manage your DineSpot profile, bookings, and preferences.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --gold: #f8b400;
+            --gold-dark: #e0a200;
+            --dark: #1a1d23;
+            --dark-2: #24262b;
+            --bg: #f5f5f7;
+            --white: #ffffff;
+            --radius: 16px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            padding-top: 70px;
+        }
+
+        /* ─── Profile Hero ─── */
+        .profile-hero {
+            background: linear-gradient(135deg, #1a1d23 0%, #2e3138 100%);
+            padding: 60px 20px 120px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .profile-avatar-wrap {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 16px;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark);
+            border: 4px solid var(--gold);
+        }
+
+        .profile-hero h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .profile-hero p {
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 14px;
+        }
+
+        .profile-role-badge {
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(248, 180, 0, 0.15);
+            border: 1px solid rgba(248, 180, 0, 0.4);
+            color: var(--gold);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── Profile Content ─── */
+        .profile-content {
+            max-width: 860px;
+            margin: -60px auto 60px;
+            padding: 0 20px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 24px;
+        }
+
+        .profile-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+        }
+
+        .profile-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile-card h3 i {
+            color: var(--gold);
+        }
+
+        /* Sidebar stats */
+        .sidebar-stat {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .sidebar-stat:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sidebar-stat-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(248, 180, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--gold-dark);
+            flex-shrink: 0;
+        }
+
+        .sidebar-stat-info .num {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1;
+        }
+
+        .sidebar-stat-info .lbl {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Quick links */
+        .quick-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .quick-link:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .quick-link:hover {
+            color: var(--gold);
+        }
+
+        .quick-link i:first-child {
+            color: var(--gold);
+            width: 20px;
+        }
+
+        /* Info fields */
+        .info-field {
+            margin-bottom: 18px;
+        }
+
+        .info-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .info-field .value {
+            font-size: 15px;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 11px 14px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-field .value i {
+            color: var(--gold);
+        }
+
+        .btn-edit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: box-shadow 0.2s;
+        }
+
+        .btn-edit:hover {
+            box-shadow: 0 6px 20px rgba(248, 180, 0, 0.4);
+        }
+
+        .btn-danger {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+
+        .btn-danger:hover {
+            background: rgba(231, 76, 60, 0.06);
+        }
+
+        /* Recent Bookings */
+        .booking-mini {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .booking-mini:last-child {
+            border-bottom: none;
+        }
+
+        .booking-mini-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(248, 180, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--gold-dark);
+            flex-shrink: 0;
+        }
+
+        .booking-mini-info {
+            flex: 1;
+        }
+
+        .booking-mini-info h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+
+        .booking-mini-info p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .booking-mini-status {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-confirmed {
+            background: rgba(72, 199, 116, 0.15);
+            color: #2ecc71;
+        }
+
+        .status-cancelled {
+            background: rgba(231, 76, 60, 0.12);
+            color: #e74c3c;
+        }
+
+        .status-completed {
+            background: rgba(0, 0, 0, 0.06);
+            color: #888;
+        }
+
+        .no-bookings {
+            text-align: center;
+            padding: 30px 0;
+            color: #bbb;
+        }
+
+        .no-bookings i {
+            font-size: 36px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .no-bookings p {
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Edit Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .modal-header {
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            color: var(--dark);
+        }
+
+        .edit-input-group {
+            margin-bottom: 15px;
+        }
+
+        .edit-input-group label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .edit-input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .edit-input-group input:focus {
+            border-color: var(--gold);
+        }
+
+        .btn-save {
+            width: 100%;
+            padding: 12px;
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+    <script src="auth-guard.js"></script>
+    <script>
+        // Redirect if not logged in
+        (function () {
+            if (!localStorage.getItem('user')) {
+                window.location.href = 'login.html?redirect=userpanel.html';
+            }
+        })();
+    </script>
+
+    <main>
+        <div class="profile-hero">
+            <div class="profile-avatar-wrap">
+                <div class="profile-avatar" id="avatarInitial">?</div>
+            </div>
+            <h1 id="profileName">Loading...</h1>
+            <p id="profileEmail">—</p>
+            <span class="profile-role-badge" id="profileRole">Member</span>
+        </div>
+
+        <div class="profile-content">
+            <div class="profile-grid">
+
+                <!-- Left Sidebar -->
+                <div class="profile-sidebar">
+
+                    <!-- Stats Card -->
+                    <div class="profile-card">
+                        <h3><i class="fas fa-chart-bar"></i> My Stats</h3>
+                        <div class="sidebar-stat">
+                            <div class="sidebar-stat-icon">🍽️</div>
+                            <div class="sidebar-stat-info">
+                                <div class="num" id="statBookings">—</div>
+                                <div class="lbl">Total Bookings</div>
+                            </div>
+                        </div>
+                        <div class="sidebar-stat">
+                            <div class="sidebar-stat-icon">⭐</div>
+                            <div class="sidebar-stat-info">
+                                <div class="num" id="statFavourite">—</div>
+                                <div class="lbl">Favourite Restaurant</div>
+                            </div>
+                        </div>
+                        <div class="sidebar-stat">
+                            <div class="sidebar-stat-icon">📅</div>
+                            <div class="sidebar-stat-info">
+                                <div class="num" id="statMember">—</div>
+                                <div class="lbl">Member Since</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="profile-card">
+                        <h3><i class="fas fa-bolt"></i> Quick Links</h3>
+                        <a href="reservation.html" class="quick-link">
+                            <span><i class="fas fa-calendar-plus"></i> Make a Reservation</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="reservation-history.html" class="quick-link">
+                            <span><i class="fas fa-history"></i> Booking History</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="monthly.html" class="quick-link">
+                            <span><i class="fas fa-crown"></i> Subscription Plans</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="contactus.html" class="quick-link">
+                            <span><i class="fas fa-headset"></i> Support</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Right Main Content -->
+                <div>
+
+                    <!-- Profile Info -->
+                    <div class="profile-card" style="margin-bottom:24px;">
+                        <h3><i class="fas fa-user"></i> Account Information</h3>
+                        <div class="info-field">
+                            <label>Full Name</label>
+                            <div class="value"><i class="fas fa-user"></i> <span id="infoName">—</span></div>
+                        </div>
+                        <div class="info-field">
+                            <label>Email Address</label>
+                            <div class="value"><i class="fas fa-envelope"></i> <span id="infoEmail">—</span></div>
+                        </div>
+                        <div class="info-field">
+                            <label>Account Role</label>
+                            <div class="value"><i class="fas fa-shield-alt"></i> <span id="infoRole">Member</span></div>
+                        </div>
+                        <button class="btn-edit" onclick="openEditModal()">
+                            <i class="fas fa-edit"></i> Edit Profile
+                        </button>
+                        <button class="btn-danger" onclick="confirmLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Sign Out
+                        </button>
+                    </div>
+
+                    <!-- Recent Bookings -->
+                    <div class="profile-card">
+                        <h3><i class="fas fa-utensils"></i> Recent Reservations</h3>
+                        <div id="recentBookings">
+                            <div class="no-bookings">
+                                <i class="fas fa-spinner fa-spin"></i>
+                                <p>Loading reservations...</p>
+                            </div>
+                        </div>
+                        <a href="reservation-history.html"
+                            style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;color:var(--gold);font-size:14px;font-weight:600;text-decoration:none;">
+                            View All Reservations <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Profile Modal -->
+        <div id="editProfileModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Edit Profile</h2>
+                    <span style="position:absolute; top:20px; right:20px; cursor:pointer;"
+                        onclick="closeEditModal()">×</span>
+                </div>
+                <form id="editProfileForm">
+                    <div class="edit-input-group">
+                        <label>Username</label>
+                        <input type="text" id="editUsername" required>
+                    </div>
+                    <div class="edit-input-group">
+                        <label>Email Address</label>
+                        <input type="email" id="editEmail" required>
+                    </div>
+                    <button type="submit" class="btn-save">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="footer.js"></script>
+    <script>
+        // ─── Populate profile from localStorage ───
+        const user = JSON.parse(localStorage.getItem('user') || 'null');
+
+        if (user) {
+            const name = user.username || user.email || 'User';
+            const initial = name.charAt(0).toUpperCase();
+
+            document.getElementById('avatarInitial').textContent = initial;
+            document.getElementById('profileName').textContent = name;
+            document.getElementById('profileEmail').textContent = user.email || '—';
+            document.getElementById('profileRole').textContent = user.role === 'admin' ? 'Administrator' : user.role === 'restaurant_owner' ? 'Restaurant Owner' : 'Member';
+            document.getElementById('infoName').textContent = name;
+            document.getElementById('infoEmail').textContent = user.email || '—';
+            document.getElementById('infoRole').textContent = user.role === 'admin' ? 'Administrator' : user.role === 'restaurant_owner' ? 'Restaurant Owner' : 'Standard Member';
+            document.getElementById('statMember').textContent = 'Feb 2025';
+        }
+
+        // ─── Fetch reservations ───
+        async function loadRecentBookings() {
+            const container = document.getElementById('recentBookings');
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (!user || !user.token) {
+                container.innerHTML = '<div class="no-bookings"><i class="fas fa-calendar-times"></i><p>No bookings yet</p><a href="reservation.html" style="color:var(--gold);font-weight:600;text-decoration:none;">Book a table</a></div>';
+                return;
+            }
+
+            try {
+                const res = await fetch(`${window.API_BASE_URL}/my-reservations`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` }
+                });
+                const data = await res.json();
+                const bookings = (data.reservations || []).slice(0, 4); // Show last 4
+
+                document.getElementById('statBookings').textContent = data.reservations ? data.reservations.length : 0;
+
+                if (bookings.length === 0) {
+                    container.innerHTML = '<div class="no-bookings"><i class="fas fa-calendar-times"></i><p>No reservations yet.</p><a href="reservation.html" style="color:var(--gold);font-weight:600;text-decoration:none;">Book your first table →</a></div>';
+                    return;
+                }
+
+                // Find favourite
+                const freq = {};
+                (data.reservations || []).forEach(b => { freq[b.restaurant] = (freq[b.restaurant] || 0) + 1; });
+                const fav = Object.entries(freq).sort((a, b) => b[1] - a[1])[0];
+                if (fav) document.getElementById('statFavourite').textContent = fav[0].split(' ').slice(0, 2).join(' ');
+
+                container.innerHTML = bookings.map(b => {
+                    const statusClass = b.status === 'cancelled' ? 'status-cancelled' : 'status-confirmed';
+                    const statusText = b.status || 'Confirmed';
+                    return `
+            <div class="booking-mini">
+              <div class="booking-mini-icon"><i class="fas fa-utensils"></i></div>
+              <div class="booking-mini-info">
+                <h4>${b.restaurant || 'Restaurant'}</h4>
+                <p>${b.date || '—'} · ${b.time || '—'} · ${b.guests} guests</p>
+              </div>
+              <span class="booking-mini-status ${statusClass}">${statusText}</span>
+            </div>
+          `;
+                }).join('');
+
+            } catch (e) {
+                container.innerHTML = '<div class="no-bookings"><i class="fas fa-exclamation-triangle"></i><p>Could not load bookings.</p></div>';
+            }
+        }
+
+        // ─── Edit Modal Logic ───
+        function openEditModal() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            document.getElementById('editUsername').value = user.username || '';
+            document.getElementById('editEmail').value = user.email || '';
+            document.getElementById('editProfileModal').style.display = 'block';
+        }
+
+        function closeEditModal() {
+            document.getElementById('editProfileModal').style.display = 'none';
+        }
+
+        document.getElementById('editProfileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('editUsername').value;
+            const email = document.getElementById('editEmail').value;
+            const user = JSON.parse(localStorage.getItem('user'));
+
+            try {
+                const res = await fetch(`${window.API_BASE_URL}/api/user/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.token}`
+                    },
+                    body: JSON.stringify({ username, email })
+                });
+
+                if (res.ok) {
+                    user.username = username;
+                    user.email = email;
+                    localStorage.setItem('user', JSON.stringify(user));
+                    window.location.reload();
+                } else {
+                    alert('Failed to update profile');
+                }
+            } catch (err) {
+                alert('Connection error');
+            }
+        });
+
+        loadRecentBookings();
+
+        function confirmLogout() {
+            if (confirm('Are you sure you want to sign out?')) {
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

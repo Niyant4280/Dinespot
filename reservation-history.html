@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Reservations — DineSpot</title>
+    <meta name="description" content="View and manage your DineSpot restaurant reservations and booking history.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #f8b400;
+            --gold-dark: #e0a200;
+            --dark: #1a1d23;
+            --bg: #f5f5f7;
+            --white: #ffffff;
+            --radius: 16px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .history-hero {
+            background: linear-gradient(135deg, #1a1d23 0%, #000 100%);
+            padding: 100px 24px 60px;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .history-hero h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .history-hero h1 span {
+            color: var(--gold);
+        }
+
+        .history-hero p {
+            opacity: 0.6;
+            font-size: 15px;
+        }
+
+        .history-container {
+            max-width: 820px;
+            margin: -40px auto 60px;
+            padding: 0 24px;
+            width: 100%;
+            z-index: 10;
+            flex: 1;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            background: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            color: #666;
+            transition: all 0.2s;
+        }
+
+        .filter-tab.active {
+            background: var(--dark);
+            color: var(--gold);
+            border-color: var(--dark);
+        }
+
+        .filter-tab:hover:not(.active) {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .booking-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 22px 24px;
+            margin-bottom: 16px;
+            display: grid;
+            grid-template-columns: 56px 1fr auto;
+            gap: 18px;
+            align-items: center;
+            border-left: 4px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-card.cancelled {
+            border-left-color: #e74c3c;
+            opacity: 0.85;
+        }
+
+        .booking-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(248, 180, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--gold-dark);
+        }
+
+        .booking-details h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 6px;
+        }
+
+        .booking-meta {
+            display: flex;
+            gap: 14px;
+            font-size: 13px;
+            color: #666;
+            flex-wrap: wrap;
+        }
+
+        .booking-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .booking-meta i {
+            color: var(--gold);
+        }
+
+        .booking-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .booking-status {
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .status-confirmed {
+            background: rgba(72, 199, 116, 0.15);
+            color: #27ae60;
+        }
+
+        .status-cancelled {
+            background: rgba(231, 76, 60, 0.13);
+            color: #cc0f35;
+        }
+
+        .status-completed {
+            background: rgba(0, 0, 0, 0.06);
+            color: #666;
+        }
+
+        .btn-cancel-booking {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(231, 76, 60, 0.4);
+            background: transparent;
+            color: #e74c3c;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: background 0.2s;
+        }
+
+        .btn-cancel-booking:hover {
+            background: rgba(231, 76, 60, 0.08);
+        }
+
+        .btn-cancel-booking:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .empty-state {
+            background: var(--white);
+            padding: 60px 40px;
+            text-align: center;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #888;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            padding: 12px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(248, 180, 0, 0.3);
+        }
+
+        @media(max-width: 600px) {
+            .booking-card {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .booking-icon {
+                margin: 0 auto;
+            }
+
+            .booking-meta {
+                justify-content: center;
+            }
+
+            .booking-actions {
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+    <script src="auth-guard.js"></script>
+
+    <div class="history-hero">
+        <h1>Your <span>Reservations</span></h1>
+        <p>Track your upcoming and past dining experiences.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="history-container">
+        <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="confirmed">Confirmed</button>
+            <button class="filter-tab" data-filter="cancelled">Cancelled</button>
+        </div>
+
+        <div id="bookings-list">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading your reservations...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="footer.js"></script>
+    <script>
+        // Redirect if not logged in
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user || !user.token) {
+            window.location.href = 'login.html?redirect=reservation-history.html';
+        }
+
+        let allBookings = [];
+
+        // Fetch all bookings
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch(`${window.API_BASE_URL}/my-reservations`, {
+                    headers: { 'Authorization': `Bearer ${user.token}` }
+                });
+                const data = await res.json();
+                allBookings = data.reservations || [];
+                renderBookings('all');
+            } catch (err) {
+                console.error(err);
+                document.getElementById('bookings-list').innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Connection Error</h3>
+            <p>Could not load reservations. Make sure the server is running.</p>
+          </div>`;
+            }
+        });
+
+        // Filter tabs
+        document.getElementById('filterTabs').addEventListener('click', e => {
+            const tab = e.target.closest('.filter-tab');
+            if (!tab) return;
+            document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            renderBookings(tab.dataset.filter);
+        });
+
+        function renderBookings(filter) {
+            const container = document.getElementById('bookings-list');
+            let filtered = allBookings;
+            if (filter === 'confirmed') filtered = allBookings.filter(b => b.status !== 'cancelled');
+            if (filter === 'cancelled') filtered = allBookings.filter(b => b.status === 'cancelled');
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+            <div class="empty-state">
+              <i class="fas fa-calendar-times"></i>
+              <h3>No Bookings Found</h3>
+              <p>${filter === 'all' ? "You haven't made any reservations yet." : `No ${filter} reservations.`}</p>
+              <a href="reservation.html" class="btn-primary">Book a Table</a>
+            </div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(b => {
+                const dateStr = b.date
+                    ? (isNaN(Date.parse(b.date)) ? b.date : new Date(b.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }))
+                    : '—';
+                const isCancelled = b.status === 'cancelled';
+                const statusClass = isCancelled ? 'status-cancelled' : 'status-confirmed';
+                const statusText = isCancelled ? 'Cancelled' : (b.status || 'Confirmed');
+
+                // Show cancel button only for non-cancelled & upcoming bookings
+                const canCancel = !isCancelled && b.id;
+
+                return `
+            <div class="booking-card${isCancelled ? ' cancelled' : ''}" id="card-${b.id}">
+              <div class="booking-icon"><i class="fas fa-utensils"></i></div>
+              <div class="booking-details">
+                <h3>${b.restaurant || 'Restaurant'}</h3>
+                <div class="booking-meta">
+                  <span><i class="fas fa-calendar"></i> ${dateStr}</span>
+                  ${b.time ? `<span><i class="fas fa-clock"></i> ${b.time}</span>` : ''}
+                  ${b.guests ? `<span><i class="fas fa-user-friends"></i> ${b.guests} Guests</span>` : ''}
+                  ${b.tableId || b.table ? `<span><i class="fas fa-chair"></i> Table ${b.tableId || b.table}</span>` : ''}
+                  ${b.totalCost ? `<span><i class="fas fa-rupee-sign"></i> ${b.totalCost}</span>` : ''}
+                </div>
+              </div>
+              <div class="booking-actions">
+                <span class="booking-status ${statusClass}">${statusText}</span>
+                ${canCancel ? `<button class="btn-cancel-booking" onclick="cancelBooking('${b.id}', '${b.tableId || b.table || ''}', this)"><i class="fas fa-times"></i> Cancel</button>` : ''}
+              </div>
+            </div>`;
+            }).join('');
+        }
+
+        // Cancel a booking
+        async function cancelBooking(reservationId, tableId, btn) {
+            if (!confirm('Are you sure you want to cancel this reservation?')) return;
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cancelling...';
+
+            try {
+                const res = await fetch(`${window.API_BASE_URL}/cancel-reservation`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${user.token}`
+                    },
+                    body: JSON.stringify({ reservationId, tableId })
+                });
+
+                if (res.ok) {
+                    // Update local data
+                    allBookings = allBookings.map(b =>
+                        b.id === reservationId ? { ...b, status: 'cancelled' } : b
+                    );
+                    renderBookings(document.querySelector('.filter-tab.active').dataset.filter);
+                    window.showToast('Reservation cancelled successfully.', 'success');
+                } else {
+                    const err = await res.json();
+                    btn.disabled = false;
+                    btn.innerHTML = '<i class="fas fa-times"></i> Cancel';
+                    window.showToast(err.error || 'Failed to cancel. Try again.', 'error');
+                }
+            } catch (e) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-times"></i> Cancel';
+                window.showToast('Cannot reach server. Please try again.', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>

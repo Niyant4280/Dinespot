@@ -1,0 +1,309 @@
+:root {
+    --gold: #f8b400;
+    --gold-dark: #e0a200;
+    --dark: #1a1d23;
+    --dark-2: #24262b;
+    --white: #ffffff;
+    --bg: #f5f5f7;
+    --radius: 20px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-top: 70px;
+}
+
+/* ===== HERO ===== */
+.pricing-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, #2a1a00 100%);
+    padding: 100px 20px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(248, 180, 0, 0.1) 0%, transparent 65%);
+}
+
+.pricing-hero h1 {
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.pricing-hero p {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+}
+
+/* ===== PRICING CARDS ===== */
+.pricing-section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.pricing-section>h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.pricing-section>p {
+    text-align: center;
+    color: #777;
+    font-size: 15px;
+    margin-bottom: 56px;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.pricing-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    position: relative;
+    text-align: center;
+}
+
+.pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14);
+    border-color: var(--gold);
+}
+
+.pricing-card.featured {
+    background: var(--dark);
+    border-color: var(--gold);
+    transform: scale(1.04);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.04) translateY(-6px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.plan-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(248, 180, 0, 0.12);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin: 0 auto 20px;
+}
+
+.pricing-card.featured .plan-icon {
+    background: rgba(248, 180, 0, 0.2);
+}
+
+.pricing-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+}
+
+.pricing-card.featured h3 {
+    color: var(--white);
+}
+
+.price {
+    margin: 20px 0;
+}
+
+.price .amount {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.price .period {
+    font-size: 14px;
+    color: #999;
+    margin-top: 4px;
+}
+
+.pricing-card.featured .price .period {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.plan-desc {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+.pricing-card.featured .plan-desc {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+    text-align: left;
+}
+
+.features-list li {
+    font-size: 14px;
+    color: #555;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pricing-card.featured .features-list li {
+    color: rgba(255, 255, 255, 0.75);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.features-list li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.subscribe-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 16px rgba(248, 180, 0, 0.3);
+    text-decoration: none;
+    text-align: center;
+}
+
+.subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(248, 180, 0, 0.45);
+}
+
+/* ===== BENEFITS SECTION ===== */
+.benefits-section {
+    background: var(--dark);
+    padding: 80px 20px;
+}
+
+.benefits-section h2 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+}
+
+.benefits-section>p {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 56px;
+    font-size: 15px;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 8px;
+}
+
+.benefit-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 16px;
+}
+
+.benefit-card p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .pricing-card.featured {
+        transform: none;
+    }
+
+    .pricing-card.featured:hover {
+        transform: translateY(-6px);
+    }
+
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .pricing-hero h1 {
+        font-size: 32px;
+    }
+}

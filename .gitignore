@@ -1,0 +1,17 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Firebase Secrets
+dine-spot-backend/serviceAccountKey.json
+dine-spot-backend/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Production
+dist/
+build/
+.next/
+.vercel

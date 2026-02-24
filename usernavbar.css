@@ -1,0 +1,172 @@
+header {
+    background-color: #1a1d23;
+    /* Matching main dark theme */
+    padding: 10px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+#home-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+}
+
+
+#head {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #f8b400;
+    margin: 0;
+}
+
+/* Navbar list */
+#nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    /* Space between menu items */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar list items */
+#nav-list li {
+    position: relative;
+}
+
+/* Navbar links */
+#nav-list li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    padding: 10px 15px;
+    transition: color 0.3s;
+}
+
+#nav-list li a:hover {
+    color: #ffc107;
+    /* Yellow hover effect */
+}
+
+/* Profile Dropdown */
+#profileSection {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Profile Image */
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+/* Profile dropdown container */
+#profileSection .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: rgba(255, 255, 255, 0.95);
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1;
+    padding: 10px 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show dropdown on hover */
+#profileSection:hover .dropdown-content {
+    display: block;
+}
+
+/* Dropdown links */
+#profileSection .dropdown-content a {
+    color: black;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+/* Hover effect for dropdown */
+#profileSection .dropdown-content a:hover {
+    background-color: #ffc107;
+    color: black;
+    border-radius: 4px;
+}
+
+/* Make sure the hamburger menu is hidden on large screens */
+.hamburger {
+    display: none;
+}
+
+/* Responsive Styling */
+@media screen and (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    #nav-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hamburger {
+        display: block;
+        font-size: 24px;
+        color: rgb(0, 0, 0);
+        cursor: pointer;
+    }
+}
+
+/* Ensure dropdown background is visible */
+#nav-list .dropdown-content {
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Light background */
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    z-index: 1;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Style dropdown links for better visibility */
+#nav-list .dropdown-content a {
+    color: black !important;
+    /* Ensure text is dark */
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    /* Make text stand out */
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Hover effect for dropdown items */
+#nav-list .dropdown-content a:hover {
+    background-color: #ffc107;
+    /* Yellow background */
+    color: black;
+    /* Ensure readable text */
+    border-radius: 4px;
+}

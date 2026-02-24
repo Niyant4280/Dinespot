@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DineSpot — Discover & Reserve Premium Dining</title>
+    <meta name="description"
+        content="DineSpot makes it easy to discover, explore and instantly reserve tables at the finest restaurants across India. 500+ premium dining spots.">
+    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== HOME PAGE EXTENDED STYLES ===== */
+        .hero {
+            min-height: 100vh;
+            background: url('homepageback.jpg') no-repeat center center / cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding-top: 70px;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(26, 29, 35, 0.82) 0%, rgba(26, 29, 35, 0.55) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            padding: 0 24px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(248, 180, 0, 0.15);
+            border: 1px solid rgba(248, 180, 0, 0.4);
+            color: #f8b400;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+
+        .hero-content h1 span {
+            color: #f8b400;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 36px;
+            line-height: 1.6;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 36px;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #fff;
+        }
+
+        /* Search Bar */
+        .hero-search {
+            position: relative;
+            max-width: 560px;
+            margin: 0 auto 36px;
+        }
+
+        .hero-search input {
+            width: 100%;
+            padding: 18px 160px 18px 56px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 15px;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            outline: none;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-search .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #f8b400;
+            font-size: 18px;
+        }
+
+        .hero-search button {
+            position: absolute;
+            right: 6px;
+            top: 6px;
+            bottom: 6px;
+            padding: 0 24px;
+            background: linear-gradient(135deg, #f8b400, #e0a200);
+            color: #1a1d23;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+        }
+
+        .hero-search button:hover {
+            box-shadow: 0 4px 16px rgba(248, 180, 0, 0.5);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px 32px;
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .num {
+            font-family: 'Poppins', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #f8b400;
+            display: block;
+        }
+
+        .stat-item .lbl {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== CATEGORIES ===== */
+        .categories-section {
+            padding: 100px 20px 80px;
+            background: #f5f5f7;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 260px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-card .cat-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.15) 60%);
+        }
+
+        .category-card .cat-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px 20px;
+            color: #fff;
+        }
+
+        .category-card .cat-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .category-card .cat-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .category-card .cat-count {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .category-card .cat-arrow {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 36px;
+            height: 36px;
+            background: rgba(248, 180, 0, 0.2);
+            border: 1px solid rgba(248, 180, 0, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #f8b400;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .category-card:hover .cat-arrow {
+            opacity: 1;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-section {
+            padding: 90px 20px;
+            background: #1a1d23;
+        }
+
+        .how-section .section-title h2 {
+            color: #fff;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step-card {
+            text-align: center;
+            padding: 32px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+
+        .step-card:hover {
+            border-color: rgba(248, 180, 0, 0.35);
+            background: rgba(248, 180, 0, 0.04);
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #f8b400, #e0a200);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #1a1d23;
+        }
+
+        .step-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .step-card p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.6;
+        }
+
+        /* ===== FEATURED RESTAURANTS ===== */
+        .featured-section {
+            padding: 90px 20px;
+            background: #f5f5f7;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 28px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .rest-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .rest-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.13);
+        }
+
+        .rest-img {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .rest-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .rest-card:hover .rest-img img {
+            transform: scale(1.06);
+        }
+
+        .rest-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: #1a1d23;
+            color: #f8b400;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rest-rating {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .rest-rating i {
+            color: #f8b400;
+        }
+
+        .rest-info {
+            padding: 20px;
+        }
+
+        .rest-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1d23;
+            margin-bottom: 6px;
+        }
+
+        .rest-meta {
+            display: flex;
+            gap: 12px;
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .rest-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .rest-meta i {
+            color: #f8b400;
+        }
+
+        .rest-price {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .rest-price span {
+            color: #f8b400;
+        }
+
+        .rest-book {
+            display: block;
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px;
+            background: linear-gradient(135deg, #f8b400, #e0a200);
+            color: #1a1d23;
+            border: none;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: box-shadow 0.2s;
+        }
+
+        .rest-book:hover {
+            box-shadow: 0 6px 20px rgba(248, 180, 0, 0.4);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section {
+            padding: 90px 20px;
+            background: #1a1d23;
+            overflow: hidden;
+        }
+
+        .testimonials-section .section-title h2 {
+            color: #fff;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 28px;
+            transition: border-color 0.3s;
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(248, 180, 0, 0.3);
+        }
+
+        .testimonial-stars {
+            color: #f8b400;
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .testimonial-text {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f8b400, #e0a200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #1a1d23;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            flex-shrink: 0;
+        }
+
+        .testimonial-name {
+            color: #fff;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .testimonial-restaurant {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 12px;
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter-section {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f8b400 0%, #e0a200 100%);
+        }
+
+        .newsletter-content {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #1a1d23;
+            margin-bottom: 12px;
+        }
+
+        .newsletter-content p {
+            color: rgba(26, 29, 35, 0.7);
+            font-size: 15px;
+            margin-bottom: 28px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 8px;
+            background: #fff;
+            border-radius: 50px;
+            padding: 6px 6px 6px 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background: transparent;
+        }
+
+        .newsletter-form button {
+            padding: 12px 28px;
+            background: #1a1d23;
+            color: #f8b400;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .newsletter-form button:hover {
+            background: #000;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 34px;
+            }
+
+            .hero-search input {
+                padding: 15px 80px 15px 46px;
+            }
+
+            .stats-bar {
+                gap: 20px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                padding: 12px 16px;
+                border-radius: 16px;
+            }
+
+            .newsletter-form button {
+                border-radius: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+    <script src="auth-guard.js"></script>
+
+    <!-- ===== HERO ===== -->
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">🏆 India's Best Restaurant Reservation Platform</div>
+                <h1>Find Your Perfect<br><span>Dining Spot</span></h1>
+                <p>Discover and instantly reserve tables at 500+ premium restaurants across India — in just a few
+                    clicks.</p>
+
+                <!-- Search Bar -->
+                <div class="hero-search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="heroSearch" placeholder="Search by restaurant, cuisine, or location..."
+                        autocomplete="off">
+                    <button onclick="doSearch()"><i class="fas fa-utensils"></i> Search</button>
+                </div>
+
+                <div class="hero-btns">
+                    <a href="reservation.html" class="btn">Reserve a Table</a>
+                    <a href="aboutus.html" class="btn-outline">Learn More</a>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="num" data-target="500">0</span>
+                        <span class="lbl">Restaurants</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num" data-target="12000">0</span>
+                        <span class="lbl">Bookings Made</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num" data-target="50">0</span>
+                        <span class="lbl">Cities</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="num" data-target="4.8">0</span>
+                        <span class="lbl">Avg Rating</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CATEGORIES ===== -->
+        <section class="categories-section">
+            <div class="section-title">
+                <h2>Explore by <span>Category</span></h2>
+                <p>From cozy cafes to rooftop bars — find the perfect vibe for every occasion</p>
+            </div>
+            <div class="categories-grid">
+                <a href="cafe.html" class="category-card">
+                    <img src="cafe1.jpg" alt="Cafes">
+                    <div class="cat-overlay"></div>
+                    <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="cat-info">
+                        <span class="cat-icon">☕</span>
+                        <div class="cat-name">Cafes</div>
+                        <div class="cat-count">4 Cozy Spots</div>
+                    </div>
+                </a>
+                <a href="rooftop.html" class="category-card">
+                    <img src="polysky.jpg" alt="Rooftop Dining">
+                    <div class="cat-overlay"></div>
+                    <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="cat-info">
+                        <span class="cat-icon">🌆</span>
+                        <div class="cat-name">Rooftop Dining</div>
+                        <div class="cat-count">8 Stunning Views</div>
+                    </div>
+                </a>
+                <a href="5star.html" class="category-card">
+                    <img src="5star1.jpg" alt="5 Star Hotels">
+                    <div class="cat-overlay"></div>
+                    <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="cat-info">
+                        <span class="cat-icon">⭐</span>
+                        <div class="cat-name">5 Star Hotel</div>
+                        <div class="cat-count">5 Luxury Venues</div>
+                    </div>
+                </a>
+                <a href="bar.html" class="category-card">
+                    <img src="bar1.jpg" alt="Bars & Lounges">
+                    <div class="cat-overlay"></div>
+                    <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="cat-info">
+                        <span class="cat-icon">🍹</span>
+                        <div class="cat-name">Bars & Lounges</div>
+                        <div class="cat-count">6 Vibrant Bars</div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== HOW IT WORKS ===== -->
+        <section class="how-section">
+            <div class="section-title">
+                <h2 style="color:#fff;">How It <span>Works</span></h2>
+                <p style="color:rgba(255,255,255,0.5);">Reserve your perfect table in 3 simple steps</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">🔍</div>
+                    <h3>Browse Restaurants</h3>
+                    <p>Explore 500+ curated restaurants by category, cuisine, location, or price range.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">📅</div>
+                    <h3>Choose Your Table</h3>
+                    <p>Pick your date, time, number of guests and select your preferred table from the live floor plan.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">✅</div>
+                    <h3>Confirm & Dine</h3>
+                    <p>Complete payment securely online and receive instant booking confirmation with all details.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FEATURED RESTAURANTS ===== -->
+        <section class="featured-section">
+            <div class="section-title">
+                <h2>Featured <span>Restaurants</span></h2>
+                <p>Handpicked dining experiences loved by our community</p>
+            </div>
+            <div class="featured-grid">
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="polysky.jpg" alt="Polysky">
+                        <span class="rest-tag">Rooftop</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.9</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>Polysky</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 7PM – 12AM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹800</span> per cover</div>
+                        <a href="reservation.html?restaurant=Polysky" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="5star1.jpg" alt="Hyatt Regency">
+                        <span class="rest-tag">5 Star</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>Hyatt Regency</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 12PM – 11PM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹1,500</span> per cover</div>
+                        <a href="reservation.html?restaurant=Hyatt%20Regency" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="cafe2.jpg" alt="The Messy Door">
+                        <span class="rest-tag">Cafe</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>The Messy Door</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 9AM – 10PM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹400</span> per cover</div>
+                        <a href="reservation.html?restaurant=The%20Messy%20Door" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="bar2.jpg" alt="Blueberry Bars">
+                        <span class="rest-tag">Bar</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.6</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>Blueberry Bars</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 6PM – 1AM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹600</span> per cover</div>
+                        <a href="reservation.html?restaurant=Blueberry%20Bars" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="veranda rofftop.avif" alt="Veranda Rooftop">
+                        <span class="rest-tag">Rooftop</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.8</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>Veranda Rooftop</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 7PM – 12AM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹900</span> per cover</div>
+                        <a href="reservation.html?restaurant=Veranda%20Rooftop" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="rest-card">
+                    <div class="rest-img">
+                        <img src="arc cafe and rooftop.avif" alt="ARC Cafe">
+                        <span class="rest-tag">Rooftop</span>
+                        <span class="rest-rating"><i class="fas fa-star"></i> 4.7</span>
+                    </div>
+                    <div class="rest-info">
+                        <h3>ARC Cafe & Rooftop</h3>
+                        <div class="rest-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Ahmedabad</span>
+                            <span><i class="fas fa-clock"></i> 11AM – 11PM</span>
+                        </div>
+                        <div class="rest-price">Starting <span>₹700</span> per cover</div>
+                        <a href="reservation.html?restaurant=ARC%20Cafe" class="rest-book"
+                            onclick="guardBookNow(event, this)">
+                            <i class="fas fa-calendar-check"></i> Book Now
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== TESTIMONIALS ===== -->
+        <section class="testimonials-section">
+            <div class="section-title">
+                <h2 style="color:#fff;">What Our <span>Guests Say</span></h2>
+                <p style="color:rgba(255,255,255,0.5);">Real experiences from thousands of happy diners</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Incredibly easy to use! Found the perfect rooftop restaurant for our
+                        anniversary and the table was exactly as pictured. Will definitely use DineSpot again."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">P</div>
+                        <div>
+                            <div class="testimonial-name">Priya Sharma</div>
+                            <div class="testimonial-restaurant">Booked at Polysky</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"The real-time table selector is genius! I could see which tables were
+                        available and choose exactly where I wanted to sit. Loved the experience!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">R</div>
+                        <div>
+                            <div class="testimonial-name">Rahul Mehta</div>
+                            <div class="testimonial-restaurant">Booked at Hyatt Regency</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★☆</div>
+                    <p class="testimonial-text">"Smooth booking process and instant confirmation. The restaurant was
+                        spectacular. DineSpot made planning our company dinner stress-free."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">A</div>
+                        <div>
+                            <div class="testimonial-name">Anjali Patel</div>
+                            <div class="testimonial-restaurant">Booked at Veranda Rooftop</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== NEWSLETTER ===== -->
+        <section class="newsletter-section">
+            <div class="newsletter-content">
+                <h2>🍽️ Never Miss a Great Deal</h2>
+                <p>Subscribe to get exclusive offers, new restaurant launches, and curated dining experiences delivered
+                    to your inbox.</p>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" id="newsletterEmail" placeholder="Enter your email address..." required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="footer.js"></script>
+    <script>
+        // ─── Counter Animation ───
+        function animateCounters() {
+            document.querySelectorAll('.stat-item .num').forEach(el => {
+                const target = parseFloat(el.dataset.target);
+                const isDecimal = !Number.isInteger(target);
+                const duration = 1800;
+                const step = target / (duration / 16);
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    if (isDecimal) {
+                        el.textContent = current.toFixed(1);
+                    } else if (target >= 1000) {
+                        el.textContent = Math.floor(current).toLocaleString('en-IN') + '+';
+                    } else {
+                        el.textContent = Math.floor(current) + '+';
+                    }
+                }, 16);
+            });
+        }
+
+        // Trigger on section visibility
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { animateCounters(); observer.disconnect(); } });
+        }, { threshold: 0.3 });
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) observer.observe(statsBar);
+
+        // ─── Dynamic Restaurant Loading ───
+        async function loadRestaurants() {
+            const grid = document.querySelector('.featured-grid');
+            try {
+                const res = await fetch('http://localhost:5000/restaurants');
+                const data = await res.json();
+
+                if (data.restaurants && data.restaurants.length > 0) {
+                    grid.innerHTML = data.restaurants.map(r => `
+                        <div class="rest-card" data-name="${r.name}" data-category="${r.category}">
+                            <div class="rest-img">
+                                <img src="${r.image || 'pexels-pixabay-260922.jpg'}" alt="${r.name}" onerror="this.src='pexels-pixabay-260922.jpg'">
+                                <span class="rest-tag">${r.category || 'Dining'}</span>
+                                <span class="rest-rating"><i class="fas fa-star"></i> ${r.rating || '4.5'}</span>
+                            </div>
+                            <div class="rest-info">
+                                <h3>${r.name}</h3>
+                                <div class="rest-meta">
+                                    <span><i class="fas fa-map-marker-alt"></i> ${r.location || 'India'}</span>
+                                    <span><i class="fas fa-clock"></i> ${r.hours || '10AM - 11PM'}</span>
+                                </div>
+                                <div class="rest-price">Avg <span>₹${r.avgPrice || '500'}</span> per cover</div>
+                                <a href="reservation.html?restaurant=${encodeURIComponent(r.name)}" class="rest-book" 
+                                   onclick="guardBookNow(event, this)">
+                                   Book Now
+                                </a>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            } catch (e) {
+                console.warn('Backend unavailable, showing static placeholders');
+            }
+        }
+        document.addEventListener('DOMContentLoaded', loadRestaurants);
+
+        // ─── Hero Search ───
+        function doSearch() {
+            const q = document.getElementById('heroSearch').value.trim().toLowerCase();
+            if (!q) return;
+
+            // First try to filter on page
+            const cards = document.querySelectorAll('.rest-card');
+            let found = false;
+            cards.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+                if (name.includes(q)) {
+                    card.style.display = 'block';
+                    if (!found) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        found = true;
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // If not found or just want to go to reservation page
+            if (!found) {
+                window.location.href = `reservation.html?restaurant=${encodeURIComponent(q)}`;
+            }
+        }
+        document.getElementById('heroSearch').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doSearch();
+        });
+
+        // ─── Book Now guard ───
+        function guardBookNow(e, el) {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (!user) {
+                e.preventDefault();
+                // Show auth toast
+                const href = el.getAttribute('href');
+                const toast = document.createElement('div');
+                toast.style.cssText = 'position:fixed;bottom:32px;right:32px;background:#1a1d23;border:1px solid rgba(248,180,0,0.4);color:#fff;padding:16px 20px;border-radius:14px;font-size:14px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.4);display:flex;align-items:center;gap:12px;max-width:320px;font-family:Poppins,sans-serif;animation:fadeIn 0.3s';
+                toast.innerHTML = `<span style="font-size:22px">🔒</span><div><b style="display:block;margin-bottom:4px">Login Required</b><span style="font-size:12px;color:#aaa">Sign in to book this table</span></div><a href="login.html?redirect=${encodeURIComponent(href)}" style="margin-left:auto;background:linear-gradient(135deg,#f8b400,#e0a200);color:#1a1d23;font-weight:700;font-size:12px;padding:8px 14px;border-radius:20px;text-decoration:none;white-space:nowrap">Sign In</a>`;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
+            }
+        }
+
+        // ─── Newsletter ───
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value.trim();
+            if (!email) return;
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-check"></i> Subscribed!';
+            btn.style.background = '#2ecc71';
+            btn.style.color = '#fff';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> Subscribe';
+                btn.style.background = '';
+                btn.style.color = '';
+                e.target.reset();
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

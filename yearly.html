@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yearly Subscription — DineSpot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="monthly.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+    <script src="auth-guard.js" defer></script>
+
+    <main>
+        <div class="pricing-hero">
+            <h1>Yearly Plans</h1>
+            <p>Save more with an annual subscription — up to 30% off monthly rates</p>
+        </div>
+
+        <section class="pricing-section">
+            <h2>Annual Membership</h2>
+            <p>Best value for dedicated food lovers — pay once, dine all year</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-icon">🍽️</div>
+                    <h3>Standard Annual</h3>
+                    <div class="price">
+                        <div class="amount">₹7,999</div>
+                        <div class="period">per year · Save ₹1,589</div>
+                    </div>
+                    <p class="plan-desc">Great for casual diners who want year-round perks at a great price.</p>
+                    <ul class="features-list">
+                        <li>Priority reservations</li>
+                        <li>5% discount on all bookings</li>
+                        <li>Access to exclusive dishes</li>
+                        <li>Monthly newsletter</li>
+                    </ul>
+                    <button class="subscribe-btn"
+                        onclick="if(window.getUser()){location.href='payment.html'}else{window.guardReserveButtons&&window.showAuthToast?showAuthToast():location.href='login.html?redirect=yearly.html'}">Get
+                        Annual Plan</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Best Value</div>
+                    <div class="plan-icon">⭐</div>
+                    <h3>Premium Annual</h3>
+                    <div class="price">
+                        <div class="amount">₹12,999</div>
+                        <div class="period">per year · Save ₹2,589</div>
+                    </div>
+                    <p class="plan-desc">The most popular choice — maximum perks at the best annual rate.</p>
+                    <ul class="features-list">
+                        <li>Everything in Standard</li>
+                        <li>Free dessert every visit</li>
+                        <li>Early bird event access</li>
+                        <li>10% discount on all bookings</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <button class="subscribe-btn"
+                        onclick="if(window.getUser()){location.href='payment.html'}else{window.guardReserveButtons&&window.showAuthToast?showAuthToast():location.href='login.html?redirect=yearly.html'}">Get
+                        Annual Plan</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-icon">👑</div>
+                    <h3>VIP Annual</h3>
+                    <div class="price">
+                        <div class="amount">₹19,999</div>
+                        <div class="period">per year · Save ₹3,989</div>
+                    </div>
+                    <p class="plan-desc">The ultimate annual membership with every exclusive privilege.</p>
+                    <ul class="features-list">
+                        <li>Everything in Premium</li>
+                        <li>Complimentary drink monthly</li>
+                        <li>VIP lounge access</li>
+                        <li>15% discount on all bookings</li>
+                        <li>Personal concierge</li>
+                    </ul>
+                    <button class="subscribe-btn"
+                        onclick="if(window.getUser()){location.href='payment.html'}else{window.guardReserveButtons&&window.showAuthToast?showAuthToast():location.href='login.html?redirect=yearly.html'}">Get
+                        Annual Plan</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <h2>Why Go Annual?</h2>
+            <p>Save more and enjoy uninterrupted dining privileges all year long</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <img src="benefit1.jpg" alt="Curated meals">
+                    <p>Enjoy curated meals and exclusive offers crafted just for you, all year round.</p>
+                </div>
+                <div class="benefit-card">
+                    <img src="benefit2.jpg" alt="New dishes">
+                    <p>Be the first to try new dishes and limited-time menu items every season.</p>
+                </div>
+                <div class="benefit-card">
+                    <img src="benefit3.jpg" alt="Priority seating">
+                    <p>Priority seating and guaranteed bookings during peak hours — 365 days a year.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="footer.js"></script>
+    <script>
+        // Guard subscribe buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.subscribe-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    if (!localStorage.getItem('user')) {
+                        e.preventDefault(); e.stopPropagation();
+                        if (typeof showAuthToast === 'function') showAuthToast();
+                        else window.location.href = 'login.html?redirect=yearly.html';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

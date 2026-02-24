@@ -1,0 +1,217 @@
+:root {
+    --gold: #f8b400;
+    --gold-dark: #e0a200;
+    --dark: #1a1d23;
+    --white: #ffffff;
+    --bg: #f5f5f7;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-top: 70px;
+}
+
+/* ===== ABOUT HERO ===== */
+.about-us-section {
+    padding-bottom: 80px;
+}
+
+.about-hero {
+    background: linear-gradient(135deg, var(--dark) 0%, #2a2000 100%);
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(248, 180, 0, 0.1) 0%, transparent 60%);
+}
+
+.about-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.about-hero p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* ===== ABOUT CONTENT ===== */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+}
+
+.about-text h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 16px;
+}
+
+.about-text h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+}
+
+.about-text p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    height: 420px;
+}
+
+/* ===== SERVICES SECTION ===== */
+.services-container {
+    background: var(--dark);
+    padding: 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 100%;
+}
+
+.services-text {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.services-text h2 {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 16px;
+}
+
+.services-text p {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.services-image {
+    display: flex;
+    justify-content: center;
+}
+
+.services-image img {
+    max-width: 400px;
+    width: 100%;
+    border-radius: 16px;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+}
+
+/* ===== CTA SECTION ===== */
+.contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+}
+
+.contact-text h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 12px;
+}
+
+.contact-text p {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+}
+
+.contact-text button {
+    padding: 14px 36px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(248, 180, 0, 0.3);
+}
+
+.contact-text button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(248, 180, 0, 0.45);
+}
+
+.contact-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    height: 340px;
+}
+
+@media (max-width: 900px) {
+
+    .about-container,
+    .services-container,
+    .contact-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 24px;
+    }
+
+    .about-hero h1 {
+        font-size: 34px;
+    }
+
+    .about-image img,
+    .contact-image img {
+        height: 280px;
+    }
+}

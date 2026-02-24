@@ -1,0 +1,171 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+/* Navbar Spacing */
+body {
+    padding-top: 80px; /* Adjust according to navbar height */
+}
+
+/* Testimonial Grid Styles (New Section) */
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 20px; /* Space between boxes */
+    max-width: 1200px;
+    margin: 40px auto; /* Center the grid with margin */
+    padding: 0 25px; /* Padding for the grid */
+}
+
+.testimonial-grid .testimonial-box {
+    padding: 20px;
+    background-color: #f0f0f0; /* Greyish background color */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center-align text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover transition */
+}
+
+.testimonial-grid .testimonial-box:hover {
+    transform: translateY(-10px); /* Lift up on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.testimonial-grid .testimonial-box h3 {
+    font-size: 1.4em; /* Size of the restaurant name */
+    font-weight: bold;
+    margin-bottom: 15px; /* Space below the restaurant name */
+    color: #333; /* Darker text color */
+}
+
+.testimonial-grid .testimonial-text {
+    font-style: italic; /* Italic for the testimonial text */
+    color: #555; /* Slightly darker grey */
+    margin: 10px 0;
+    font-size: 1.1em; /* Font size for the testimonial text */
+    line-height: 1.4em; /* Improve readability */
+}
+
+.testimonial-grid .testimonial-name {
+    font-weight: bold;
+    color: #333;
+    margin-top: 15px; /* Space above the name */
+    font-size: 1.2em; /* Larger font size for the name */
+}
+
+.testimonial-grid .testimonial-role {
+    font-size: 1em; /* Normal text size for the role */
+    color: #888;
+    margin-top: 5px; /* Adjust spacing above the role */
+}
+
+/* Existing Testimonial Section Styles */
+.testimonial-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px; /* Space between testimonials */
+    max-width: 900px; /* Width of the section */
+    margin: 40px auto;
+    padding: 0 25px; /* Padding around the section */
+}
+
+.testimonial-section .testimonial-box {
+    display: flex;
+    align-items: center;
+    padding: 35px; /* Padding inside the box */
+    background-color: #f0f0f0; /* Default background color */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.1); /* Shadow for the box */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover transition */
+}
+
+.testimonial-section .testimonial-box:hover {
+    transform: translateY(-10px); /* Lift up on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.testimonial-section .testimonial-box.reverse {
+    flex-direction: row-reverse;
+}
+
+.testimonial-section .testimonial-image {
+    width: 180px; /* Image width */
+    height: 180px; /* Image height */
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    margin-right: 25px; /* Space between image and text */
+}
+
+.testimonial-section .testimonial-box.reverse .testimonial-image {
+    margin-left: 25px; /* Space for reverse layout */
+    margin-right: 0;
+}
+
+.testimonial-section .testimonial-content {
+    max-width: 600px; /* Max width for content */
+    display: flex;
+    flex-direction: column; /* Vertical layout */
+    gap: 10px; /* Space between text lines */
+}
+
+.testimonial-section .testimonial-content p {
+    font-style: italic; /* Italic for testimonial text */
+    color: #555;
+    margin: 0;
+    font-size: 1.2em; /* Font size for testimonial text */
+}
+
+.testimonial-section .testimonial-content h3 {
+    font-weight: bold;
+    margin-top: 12px; /* Space above the name */
+    margin-bottom: 6px; /* Space below the name */
+    color: #333;
+    font-size: 1.3em; /* Larger font size */
+}
+
+.testimonial-section .testimonial-content p:last-of-type {
+    font-size: 1em; /* Normal text size for the role */
+    color: #888;
+}
+
+/* Apply pink background color to the first three testimonial boxes in the section */
+.testimonial-section .testimonial-box:nth-of-type(1),
+.testimonial-section .testimonial-box:nth-of-type(2),
+.testimonial-section .testimonial-box:nth-of-type(3) {
+    background-color: #FBD5D5; /* Pink background color */
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+    .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial-grid {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+
+    .testimonial-section {
+        padding: 15px; /* Reduce padding on smaller screens */
+    }
+
+    .testimonial-section .testimonial-box {
+        flex-direction: column; /* Stack image and text */
+        text-align: center;
+    }
+
+    .testimonial-section .testimonial-box.reverse {
+        flex-direction: column; /* Ensure consistent stacking for reverse layout */
+    }
+
+    .testimonial-section .testimonial-image {
+        margin-right: 0; /* Reset spacing for smaller screens */
+        margin-bottom: 15px; /* Add spacing below image */
+    }
+}

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — DineSpot</title>
+  <meta name="description"
+    content="Create a DineSpot account and start reserving tables at 500+ premium restaurants across India in seconds.">
+  <link rel="stylesheet" href="loginsignup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- LEFT: Brand Panel -->
+  <div class="brand-panel">
+    <div class="brand-content">
+      <div class="brand-logo">
+        <span>DineSpot</span>
+      </div>
+      <h2 class="brand-tagline">Join the<br><span>DineSpot Family.</span></h2>
+      <p class="brand-desc">Create your free account and start booking tables at the best restaurants near you.</p>
+      <ul class="brand-features">
+        <li><span class="feat-icon">🆓</span> Free to join, always</li>
+        <li><span class="feat-icon">📅</span> Manage all your bookings</li>
+        <li><span class="feat-icon">⭐</span> Earn loyalty rewards</li>
+        <li><span class="feat-icon">🔔</span> Get exclusive deals</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RIGHT: Form Panel -->
+  <div class="form-panel">
+    <div class="form-box">
+
+      <div class="mobile-logo">
+        <img src="logo.png" alt="DineSpot">
+        <span>DineSpot</span>
+      </div>
+
+      <h2>Create Account</h2>
+      <p class="subheading">Join DineSpot today — it's completely free</p>
+
+      <!-- Error banner -->
+      <div class="form-error-banner" id="errorBanner">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="errorMsg">Something went wrong.</span>
+      </div>
+
+      <form id="signupForm" novalidate>
+
+        <!-- Full Name -->
+        <div class="input-group">
+          <label for="fullName">Full Name</label>
+          <div class="input-wrap">
+            <i class="fas fa-user input-icon"></i>
+            <input type="text" id="fullName" placeholder="John Doe" autocomplete="name" required>
+          </div>
+          <div class="field-msg" id="nameMsg"></div>
+        </div>
+
+        <!-- Email -->
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrap">
+            <i class="fas fa-envelope input-icon"></i>
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+          <div class="field-msg" id="emailMsg"></div>
+        </div>
+
+        <!-- Password -->
+        <div class="input-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" required>
+            <button type="button" class="toggle-pw" id="togglePw" aria-label="Show password">
+              <i class="fas fa-eye" id="eyeIcon"></i>
+            </button>
+          </div>
+          <!-- Strength bar -->
+          <div class="strength-bar-wrap" id="strengthWrap">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-label" id="strengthLabel">Password strength</div>
+          </div>
+          <div class="field-msg" id="passwordMsg"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="input-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrap">
+            <i class="fas fa-lock input-icon"></i>
+            <input type="password" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password"
+              required>
+            <button type="button" class="toggle-pw" id="toggleConfirm" aria-label="Show confirm password">
+              <i class="fas fa-eye" id="eyeIcon2"></i>
+            </button>
+          </div>
+          <div class="field-msg" id="confirmMsg"></div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <div class="spinner"></div>
+          <span class="btn-text"><i class="fas fa-user-plus"></i> Create Account</span>
+        </button>
+      </form>
+
+      <div class="switch-link">
+        Already have an account? <a href="login.html">Sign in here</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== PASSWORD TOGGLES =====
+    function setupToggle(btnId, inputId, iconId) {
+      document.getElementById(btnId).addEventListener('click', () => {
+        const inp = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        const isHidden = inp.type === 'password';
+        inp.type = isHidden ? 'text' : 'password';
+        icon.className = isHidden ? 'fas fa-eye-slash' : 'fas fa-eye';
+      });
+    }
+    setupToggle('togglePw', 'password', 'eyeIcon');
+    setupToggle('toggleConfirm', 'confirmPassword', 'eyeIcon2');
+
+    // ===== PASSWORD STRENGTH =====
+    const pwInput = document.getElementById('password');
+    const strengthFill = document.getElementById('strengthFill');
+    const strengthLabel = document.getElementById('strengthLabel');
+    const strengthWrap = document.getElementById('strengthWrap');
+
+    pwInput.addEventListener('input', () => {
+      const val = pwInput.value;
+      if (!val) { strengthWrap.classList.remove('show'); return; }
+      strengthWrap.classList.add('show');
+
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      const levels = [
+        { pct: '25%', color: '#ff4d4f', label: 'Weak' },
+        { pct: '50%', color: '#fa8c16', label: 'Fair' },
+        { pct: '75%', color: '#fadb14', label: 'Good' },
+        { pct: '100%', color: '#52c41a', label: 'Strong' },
+      ];
+      const lvl = levels[score - 1] || levels[0];
+      strengthFill.style.width = lvl.pct;
+      strengthFill.style.background = lvl.color;
+      strengthLabel.textContent = `Strength: ${lvl.label}`;
+      strengthLabel.style.color = lvl.color;
+    });
+
+    // ===== REAL-TIME CONFIRM MATCH =====
+    const confirmInput = document.getElementById('confirmPassword');
+    const confirmMsg = document.getElementById('confirmMsg');
+    confirmInput.addEventListener('input', () => {
+      if (confirmInput.value && confirmInput.value !== pwInput.value) {
+        setFieldState(confirmInput, confirmMsg, 'error', 'Passwords do not match.');
+      } else if (confirmInput.value && confirmInput.value === pwInput.value) {
+        setFieldState(confirmInput, confirmMsg, 'success', '');
+      } else {
+        clearField(confirmInput, confirmMsg);
+      }
+    });
+
+    // ===== REAL-TIME EMAIL VALIDATION =====
+    const emailInput = document.getElementById('email');
+    const emailMsg = document.getElementById('emailMsg');
+    emailInput.addEventListener('blur', () => {
+      const val = emailInput.value.trim();
+      if (!val) {
+        setFieldState(emailInput, emailMsg, 'error', 'Email is required.');
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        setFieldState(emailInput, emailMsg, 'error', 'Enter a valid email address.');
+      } else {
+        setFieldState(emailInput, emailMsg, 'success', '');
+      }
+    });
+    emailInput.addEventListener('input', () => clearField(emailInput, emailMsg));
+
+    // ===== FORM SUBMIT =====
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('fullName').value.trim();
+      const email = emailInput.value.trim();
+      const password = pwInput.value;
+      const confirm = confirmInput.value;
+      const errorBanner = document.getElementById('errorBanner');
+      const errorMsg = document.getElementById('errorMsg');
+      const btn = document.getElementById('submitBtn');
+      const nameMsg = document.getElementById('nameMsg');
+      const passwordMsg = document.getElementById('passwordMsg');
+
+      let valid = true;
+
+      if (!name || name.length < 2) {
+        setFieldState(document.getElementById('fullName'), nameMsg, 'error', 'Please enter your full name.');
+        valid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        setFieldState(emailInput, emailMsg, 'error', 'Enter a valid email address.');
+        valid = false;
+      }
+      if (!password || password.length < 8) {
+        setFieldState(pwInput, passwordMsg, 'error', 'Password must be at least 8 characters.');
+        valid = false;
+      }
+      if (password !== confirm) {
+        setFieldState(confirmInput, confirmMsg, 'error', 'Passwords do not match.');
+        valid = false;
+      }
+      if (!valid) return;
+
+      btn.classList.add('loading');
+      btn.disabled = true;
+      errorBanner.classList.remove('show');
+
+      try {
+        const response = await fetch('http://localhost:5000/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, username: name }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          // Auto-login after signup
+          const loginRes = await fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const loginData = await loginRes.json();
+          if (loginRes.ok) {
+            localStorage.setItem('user', JSON.stringify({
+              username: loginData.user.username,
+              email: loginData.user.email,
+              token: loginData.token
+            }));
+            window.location.href = 'index.html';
+          } else {
+            window.location.href = 'login.html';
+          }
+        } else {
+          errorMsg.textContent = data.error || 'Signup failed. Please try again.';
+          errorBanner.classList.add('show');
+          btn.classList.remove('loading');
+          btn.disabled = false;
+        }
+      } catch (err) {
+        errorMsg.textContent = 'Cannot connect to server. Please try again.';
+        errorBanner.classList.add('show');
+        btn.classList.remove('loading');
+        btn.disabled = false;
+      }
+    });
+
+    // ===== HELPERS =====
+    function setFieldState(input, msgEl, type, msg) {
+      input.classList.remove('is-error', 'is-success');
+      msgEl.classList.remove('error', 'success');
+      if (type === 'error') {
+        input.classList.add('is-error');
+        msgEl.classList.add('error');
+        msgEl.textContent = msg;
+      } else {
+        input.classList.add('is-success');
+        msgEl.textContent = '';
+      }
+    }
+    function clearField(input, msgEl) {
+      input.classList.remove('is-error', 'is-success');
+      msgEl.classList.remove('error', 'success');
+      msgEl.textContent = '';
+    }
+
+    // Already logged in?
+    if (localStorage.getItem('user')) window.location.href = 'index.html';
+  </script>
+</body>
+
+</html>

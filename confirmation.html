@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation Confirmed — DineSpot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --gold: #f8b400;
+      --gold-dark: #e0a200;
+      --dark: #1a1d23;
+      --white: #ffffff;
+      --bg: #f5f5f7;
+      --radius: 20px;
+      --shadow: 0 16px 60px rgba(0, 0, 0, 0.14);
+      --transition: 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, #2a1a00 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .confirmation-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+      animation: slideUp 0.5s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .confirmation-header {
+      background: linear-gradient(135deg, #1a3a1a 0%, #0d2a0d 100%);
+      padding: 40px 32px;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      background: rgba(72, 199, 116, 0.15);
+      border: 3px solid #48c774;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 32px;
+      color: #48c774;
+    }
+
+    .confirmation-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #48c774;
+      margin-bottom: 6px;
+    }
+
+    .confirmation-header p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .confirmation-body {
+      padding: 32px;
+    }
+
+    .booking-id {
+      background: rgba(248, 180, 0, 0.08);
+      border: 1px solid rgba(248, 180, 0, 0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--gold-dark);
+      font-weight: 600;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 14px;
+    }
+
+    .detail-row:last-of-type {
+      border-bottom: none;
+    }
+
+    .detail-label {
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-label i {
+      color: var(--gold);
+      width: 16px;
+    }
+
+    .detail-value {
+      font-weight: 600;
+      color: var(--dark);
+      text-align: right;
+    }
+
+    .total-row {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .total-row span:first-child {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
+    .total-row span:last-child {
+      color: var(--gold);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .home-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--dark);
+      border: none;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(248, 180, 0, 0.35);
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(248, 180, 0, 0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="confirmation-card">
+    <div class="confirmation-header">
+      <div class="success-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <h1>Reservation Confirmed!</h1>
+      <p>Your table has been successfully booked</p>
+    </div>
+
+    <div class="confirmation-body">
+      <div class="booking-id" id="bookingId">
+        Booking ID: <span id="bookingRef">DS-XXXXXX</span>
+      </div>
+
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-user"></i> Guest Name</span>
+        <span class="detail-value" id="confirm-name">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-utensils"></i> Restaurant</span>
+        <span class="detail-value" id="confirm-restaurant">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-calendar"></i> Date</span>
+        <span class="detail-value" id="confirm-date">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-clock"></i> Time</span>
+        <span class="detail-value" id="confirm-time">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-users"></i> Guests</span>
+        <span class="detail-value" id="confirm-guests">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label"><i class="fas fa-credit-card"></i> Payment</span>
+        <span class="detail-value" id="confirm-payment">—</span>
+      </div>
+
+      <div class="total-row">
+        <span>Total Amount</span>
+        <span id="confirm-amount">₹0</span>
+      </div>
+
+      <a href="index.html" class="home-btn">
+        <i class="fas fa-home"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Read fresh booking data from sessionStorage
+    const raw = sessionStorage.getItem('reservationData');
+    const data = raw ? JSON.parse(raw) : null;
+
+    // ── Clear immediately so stale data never shows on refresh ──
+    sessionStorage.removeItem('reservationData');
+
+    if (!data || !data.date) {
+      // No real booking data — show a friendly message
+      document.querySelector('.confirmation-header').innerHTML = `
+        <div class="success-icon" style="border-color:#f8b400;color:#f8b400;background:rgba(248,180,0,0.1);">
+          <i class="fas fa-calendar-times"></i>
+        </div>
+        <h1 style="color:#f8b400;">No Active Booking</h1>
+        <p>We couldn't find a recent reservation. Please make a new booking.</p>
+      `;
+      document.querySelector('.confirmation-body').innerHTML = `
+        <p style="text-align:center;color:#888;font-size:14px;margin-bottom:24px;">
+          Your booking details will appear here right after you complete a reservation and payment.
+        </p>
+        <a href="reservation.html" class="home-btn">
+          <i class="fas fa-utensils"></i> Make a Reservation
+        </a>
+        <a href="index.html" class="home-btn" style="margin-top:12px;background:#1a1d23;color:#fff;box-shadow:none;">
+          <i class="fas fa-home"></i> Back to Home
+        </a>
+      `;
+    } else {
+      // ── Populate real booking data ──
+      document.getElementById('confirm-name').textContent = data.name || '—';
+      document.getElementById('confirm-restaurant').textContent = data.restaurant || '—';
+
+      // Format date nicely e.g. "18 Feb 2025"
+      try {
+        const d = new Date(data.date);
+        document.getElementById('confirm-date').textContent = d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+      } catch {
+        document.getElementById('confirm-date').textContent = data.date;
+      }
+
+      document.getElementById('confirm-time').textContent = data.time || '—';
+      document.getElementById('confirm-guests').textContent = data.guests ? data.guests + ' guests' : '—';
+      document.getElementById('confirm-payment').textContent = data.payment || '—';
+
+      // Amount
+      if (data.amount) {
+        const amt = String(data.amount).replace(/[^0-9.]/g, '');
+        document.getElementById('confirm-amount').textContent = amt ? '₹' + Number(amt).toLocaleString('en-IN') : data.amount;
+      }
+
+      // Table row — insert after guests row if table info exists
+      if (data.table && data.table !== '—') {
+        const tableRow = document.createElement('div');
+        tableRow.className = 'detail-row';
+        tableRow.innerHTML = `
+          <span class="detail-label"><i class="fas fa-chair"></i> Table</span>
+          <span class="detail-value">${data.table}</span>
+        `;
+        // Insert before the payment row
+        const paymentRow = document.getElementById('confirm-payment').closest('.detail-row');
+        paymentRow.parentNode.insertBefore(tableRow, paymentRow);
+      }
+
+      // Generate booking reference
+      const ref = 'DS-' + Math.random().toString(36).substr(2, 6).toUpperCase();
+      document.getElementById('bookingRef').textContent = ref;
+    }
+  </script>
+</body>
+
+</html>

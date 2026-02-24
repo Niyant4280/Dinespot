@@ -1,0 +1,72 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+main {
+    padding: 100px 20px 40px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.featured-restaurants h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.restaurant-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.restaurant-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.restaurant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.restaurant-card h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #007BFF;
+    margin: 15px 0 5px;
+}
+
+.restaurant-card p.cuisine {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.restaurant-card p.location {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+    .restaurant-gallery {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

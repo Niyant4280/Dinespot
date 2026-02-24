@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — DineSpot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="blog.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <script src="navbar.js" defer></script>
+
+  <!-- ===== HERO ===== -->
+  <section class="blog-hero">
+    <div class="blog-hero-inner">
+      <span class="hero-eyebrow"><i class="fas fa-pen-nib"></i> DineSpot Stories</span>
+      <h1>Taste. Explore. <span>Inspire.</span></h1>
+      <p>Tips, trends, and tales from the world of dining — curated for food lovers like you.</p>
+      <div class="hero-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="blogSearch" placeholder="Search articles..." oninput="filterBlogs(this.value)">
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FILTER TABS ===== -->
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+    <button class="filter-btn" onclick="setFilter('Dining Guide', this)">Dining Guide</button>
+    <button class="filter-btn" onclick="setFilter('Tips & Tricks', this)">Tips & Tricks</button>
+    <button class="filter-btn" onclick="setFilter('Food Trends', this)">Food Trends</button>
+    <button class="filter-btn" onclick="setFilter('Lifestyle', this)">Lifestyle</button>
+  </div>
+
+  <!-- ===== FEATURED POST ===== -->
+  <div class="featured-wrapper">
+    <article class="featured-post" data-category="Dining Guide">
+      <div class="featured-img-wrap">
+        <img src="blog1.jpg" alt="Top 10 Restaurants">
+        <span class="featured-badge"><i class="fas fa-star"></i> Featured</span>
+      </div>
+      <div class="featured-body">
+        <span class="blog-tag">Dining Guide</span>
+        <h2>Top 10 Restaurants to Visit in Mumbai This Season</h2>
+        <p>From rooftop dining to hidden gems, here are the must-visit spots in Mumbai that every food lover should
+          experience. We went behind the scenes to bring you the most authentic picks.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-user-circle"></i> DineSpot Team</span>
+          <span><i class="fas fa-calendar"></i> Feb 2025</span>
+          <span><i class="fas fa-clock"></i> 5 min read</span>
+        </div>
+        <a href="#" class="read-more-btn"
+          onclick="openModal('Top 10 Restaurants in Mumbai', 'Dining Guide', 'Feb 2025', '5 min read', `<p>Mumbai's dining scene is more vibrant than ever. From the iconic rooftop restaurants of Bandra to the hidden gems tucked in Colaba's bylanes, there's something for every palate.</p><p>This season, we've curated the absolute best — places where the ambiance matches the food, and every bite tells a story. Whether you're planning a romantic dinner or a family feast, this list has you covered.</p><h3>1. The Rooftop at Taj</h3><p>Unparalleled views of the Gateway of India paired with world-class cuisine. Book weeks in advance.</p><h3>2. Bastian</h3><p>The seafood here is legendary. The grilled lobster alone is worth the trip to Bandra.</p><p>...and 8 more incredible picks await you!</p>`); return false;">Read
+          Full Article <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+  </div>
+
+  <!-- ===== BLOG GRID ===== -->
+  <main class="blog-container" id="blogContainer">
+
+    <article class="blog-card" data-category="Tips &amp; Tricks">
+      <div class="blog-img-wrap">
+        <img src="blog2.jpg" alt="Reservation Tips">
+        <span class="blog-tag overlay-tag">Tips &amp; Tricks</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>How to Make the Perfect Restaurant Reservation</h3>
+        <p>Avoid common mistakes and ensure a seamless dining experience with these expert reservation tips.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Jan 2025</span>
+          <span><i class="fas fa-clock"></i> 4 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Perfect Restaurant Reservation', 'Tips & Tricks', 'Jan 2025', '4 min read', '<p>Making a reservation seems simple, but there are nuances that can make or break your dining experience. Here are the expert tips that seasoned diners swear by.</p><p><strong>1. Book Early:</strong> For popular restaurants, book at least 2 weeks in advance, especially for weekends.</p><p><strong>2. Mention Special Occasions:</strong> Always let the restaurant know if it\'s a birthday or anniversary — they often go the extra mile.</p><p><strong>3. Confirm 24 Hours Before:</strong> A quick call ensures your table is ready and avoids no-show fees.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <article class="blog-card" data-category="Food Trends">
+      <div class="blog-img-wrap">
+        <img src="blog3.jpg" alt="Food Trends">
+        <span class="blog-tag overlay-tag">Food Trends</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>The Biggest Food Trends Shaping Dining in 2025</h3>
+        <p>Plant-based menus, hyper-local ingredients, and immersive dining — here's what's hot in the culinary world.
+        </p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Jan 2025</span>
+          <span><i class="fas fa-clock"></i> 6 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Food Trends 2025', 'Food Trends', 'Jan 2025', '6 min read', '<p>2025 is shaping up to be a landmark year for the culinary world. Here are the trends that are redefining how we eat out.</p><p><strong>Plant-Based Everything:</strong> It\'s no longer just a niche. Top restaurants are building entire menus around plant-based ingredients without compromising on taste.</p><p><strong>Hyper-Local Sourcing:</strong> Farm-to-table has evolved. Chefs are now partnering with local farmers within a 50km radius to ensure freshness and sustainability.</p><p><strong>Immersive Dining:</strong> Dinner with a show — theatrical presentations, multi-sensory experiences, and interactive menus are becoming the norm.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <article class="blog-card" data-category="Lifestyle">
+      <div class="blog-img-wrap">
+        <img src="blog1.jpg" alt="Date Night">
+        <span class="blog-tag overlay-tag">Lifestyle</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>The Ultimate Guide to Planning a Perfect Date Night</h3>
+        <p>From choosing the right restaurant to setting the mood — everything you need for an unforgettable evening.
+        </p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Dec 2024</span>
+          <span><i class="fas fa-clock"></i> 7 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Perfect Date Night Guide', 'Lifestyle', 'Dec 2024', '7 min read', '<p>A perfect date night is all about the details. Here\'s how to plan one that she (or he) will never forget.</p><p><strong>Choose the Right Vibe:</strong> Rooftop for romance, cozy bistro for intimacy, fine dining for a special occasion. Match the restaurant to the mood.</p><p><strong>Reserve in Advance:</strong> Nothing kills the mood like a 45-minute wait. Book your table at least a week ahead.</p><p><strong>Dress the Part:</strong> Check the dress code. Most premium restaurants expect smart casual at minimum.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <article class="blog-card" data-category="Dining Guide">
+      <div class="blog-img-wrap">
+        <img src="blog2.jpg" alt="Rooftop Dining">
+        <span class="blog-tag overlay-tag">Dining Guide</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>Best Rooftop Dining Experiences Across India</h3>
+        <p>Dine under the stars at India's most breathtaking rooftop restaurants — from Delhi to Goa.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Nov 2024</span>
+          <span><i class="fas fa-clock"></i> 5 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Best Rooftop Dining in India', 'Dining Guide', 'Nov 2024', '5 min read', '<p>India\'s rooftop dining scene is nothing short of spectacular. Here are our top picks across the country.</p><p><strong>Delhi:</strong> Lodi - The Garden Restaurant offers a magical al fresco experience surrounded by Mughal-era monuments.</p><p><strong>Mumbai:</strong> Aer at Four Seasons gives you 360° views of the city skyline with cocktails to match.</p><p><strong>Goa:</strong> Antares Restaurant & Beach Club combines rooftop dining with ocean views — pure bliss.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <article class="blog-card" data-category="Tips &amp; Tricks">
+      <div class="blog-img-wrap">
+        <img src="blog3.jpg" alt="Etiquette">
+        <span class="blog-tag overlay-tag">Tips &amp; Tricks</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>Fine Dining Etiquette: Everything You Need to Know</h3>
+        <p>From which fork to use to how to summon the waiter — master the art of fine dining with confidence.</p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Oct 2024</span>
+          <span><i class="fas fa-clock"></i> 8 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Fine Dining Etiquette', 'Tips & Tricks', 'Oct 2024', '8 min read', '<p>Fine dining can feel intimidating, but with a few key rules, you\'ll feel right at home in any upscale restaurant.</p><p><strong>The Fork Rule:</strong> Work from the outside in. The outermost fork is for the first course.</p><p><strong>Napkin Etiquette:</strong> Place it on your lap as soon as you sit. If you leave the table, place it on your chair — not the table.</p><p><strong>Ordering Wine:</strong> Let the sommelier guide you. Don\'t be afraid to mention your budget — they\'re there to help.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+    <article class="blog-card" data-category="Food Trends">
+      <div class="blog-img-wrap">
+        <img src="blog1.jpg" alt="Sustainable Dining">
+        <span class="blog-tag overlay-tag">Food Trends</span>
+      </div>
+      <div class="blog-card-body">
+        <h3>Sustainable Dining: How Restaurants Are Going Green</h3>
+        <p>Zero-waste kitchens, compostable packaging, and carbon-neutral menus — the future of dining is sustainable.
+        </p>
+        <div class="blog-meta">
+          <span><i class="fas fa-calendar"></i> Sep 2024</span>
+          <span><i class="fas fa-clock"></i> 5 min read</span>
+        </div>
+        <a href="#" class="read-more"
+          onclick="openModal('Sustainable Dining', 'Food Trends', 'Sep 2024', '5 min read', '<p>The restaurant industry is one of the biggest contributors to food waste globally. But a new wave of eco-conscious chefs and restaurateurs are changing that.</p><p><strong>Zero-Waste Kitchens:</strong> Every part of every ingredient is used. Vegetable peels become stocks, leftover bread becomes croutons.</p><p><strong>Compostable Packaging:</strong> Takeaway containers made from sugarcane and bamboo are replacing plastic.</p><p><strong>Carbon-Neutral Menus:</strong> Some restaurants now calculate and offset the carbon footprint of every dish on their menu.</p>'); return false;">Read
+          More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- ===== NO RESULTS ===== -->
+  <div class="no-results" id="noResults" style="display:none;">
+    <i class="fas fa-search"></i>
+    <p>No articles found. Try a different search.</p>
+  </div>
+
+  <!-- ===== ARTICLE MODAL ===== -->
+  <div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+      <div class="modal-header">
+        <span class="blog-tag" id="modalTag"></span>
+        <h2 id="modalTitle"></h2>
+        <div class="blog-meta" id="modalMeta"></div>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <a href="reservation.html" class="modal-cta">Reserve a Table <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <script src="footer.js"></script>
+  <script>
+    let activeFilter = 'all';
+
+    function setFilter(cat, btn) {
+      activeFilter = cat;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterBlogs(document.getElementById('blogSearch').value);
+    }
+
+    function filterBlogs(query) {
+      const q = query.toLowerCase();
+      const cards = document.querySelectorAll('.blog-card, .featured-post');
+      let visible = 0;
+      cards.forEach(card => {
+        const cat = card.dataset.category || '';
+        const text = card.innerText.toLowerCase();
+        const matchCat = activeFilter === 'all' || cat === activeFilter || cat.replace('&amp;', '&') === activeFilter;
+        const matchQ = !q || text.includes(q);
+        const show = matchCat && matchQ;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      document.getElementById('noResults').style.display = visible === 0 ? 'flex' : 'none';
+    }
+
+    function openModal(title, tag, date, readTime, content) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalTag').textContent = tag;
+      document.getElementById('modalMeta').innerHTML = `<span><i class="fas fa-calendar"></i> ${date}</span><span><i class="fas fa-clock"></i> ${readTime}</span>`;
+      document.getElementById('modalBody').innerHTML = content;
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
+</body>
+
+</html>

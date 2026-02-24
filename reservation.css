@@ -1,0 +1,242 @@
+:root {
+    --gold: #f8b400;
+    --gold-dark: #e0a200;
+    --dark: #1a1d23;
+    --white: #ffffff;
+    --bg: #f5f5f7;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-top: 70px;
+}
+
+/* ===== RESERVATION LAYOUT ===== */
+.reservation-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    min-height: calc(100vh - 70px);
+}
+
+/* ===== FORM PANEL (right) ===== */
+.reservation {
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 48px;
+    overflow-y: auto;
+}
+
+.reservation h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 6px;
+}
+
+.reservation .subtitle {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.restaurant-name-display {
+    background: rgba(248, 180, 0, 0.1);
+    border: 1px solid rgba(248, 180, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--gold-dark);
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark);
+    background: #fafafa;
+    outline: none;
+    transition: border-color var(--transition), background var(--transition);
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--gold);
+    background: var(--white);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.total-cost-box {
+    background: var(--dark);
+    border-radius: 12px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.total-cost-box p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.total-cost-box span {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+#reservation-form button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(248, 180, 0, 0.35);
+}
+
+#reservation-form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(248, 180, 0, 0.5);
+}
+
+@media (max-width: 1024px) {
+    .reservation-container {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation {
+        padding: 40px 32px;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation {
+        padding: 28px 20px;
+    }
+}
+
+/* ===== DYNAMIC LAYOUT THEMES ===== */
+.floor-plan.layout-cafe {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(0, 0, 0, 0.4));
+    border-color: rgba(139, 69, 19, 0.3);
+}
+
+.floor-plan.layout-rooftop {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(0, 0, 0, 0.4));
+    border-color: rgba(52, 152, 219, 0.3);
+}
+
+.floor-plan.layout-bar {
+    background: linear-gradient(135deg, rgba(155, 89, 182, 0.1), rgba(0, 0, 0, 0.4));
+    border-color: rgba(155, 89, 182, 0.3);
+}
+
+.floor-plan.layout-hotel {
+    background: linear-gradient(135deg, rgba(248, 180, 0, 0.1), rgba(0, 0, 0, 0.6));
+    border-color: rgba(248, 180, 0, 0.4);
+}
+
+/* Table States */
+.table-item.held svg circle,
+.table-item.held svg rect {
+    fill: rgba(243, 156, 18, 0.3) !important;
+    stroke: #f39c12 !important;
+    stroke-width: 2px !important;
+    filter: drop-shadow(0 0 8px rgba(243, 156, 18, 0.4));
+}
+
+.table-item.held text {
+    fill: #f39c12 !important;
+}
+
+.table-item.occupied svg circle,
+.table-item.occupied svg rect {
+    fill: rgba(231, 76, 60, 0.3) !important;
+    stroke: #e74c3c !important;
+}
+
+.table-item.selected svg circle,
+.table-item.selected svg rect {
+    fill: rgba(248, 180, 0, 0.3) !important;
+    stroke: #f8b400 !important;
+    stroke-width: 2.5px !important;
+}
+
+/* Optimal Suggestion Pulse */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(248, 180, 0, 0));
+    }
+
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 15px rgba(248, 180, 0, 0.6));
+    }
+
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 0 rgba(248, 180, 0, 0));
+    }
+}
+
+#findTableBtn:hover {
+    background: rgba(248, 180, 0, 0.2) !important;
+    border-color: #f8b400 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(248, 180, 0, 0.2);
+}
+
+#findTableBtn:active {
+    transform: scale(0.98);
+}

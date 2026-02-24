@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — Dine Spot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="contactus.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>
+        var submitted = false;
+        function setSubmitted() {
+            // Validate before allowing submit
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            if (!name || name.length < 2) {
+                alert('Please enter your full name.');
+                return false;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+            if (!/^\+?[\d\s\-]{10,}$/.test(phone)) {
+                alert('Please enter a valid phone number (at least 10 digits).');
+                return false;
+            }
+            if (message.length < 20) {
+                alert('Please write a message of at least 20 characters.');
+                return false;
+            }
+            submitted = true;
+            return true;
+        }
+        function iframeLoaded() {
+            if (submitted) {
+                submitted = false;
+                // Show toast instead of alert
+                const toast = document.createElement('div');
+                toast.style.cssText = 'position:fixed;bottom:32px;right:32px;background:#52c41a;color:#fff;padding:16px 24px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,0.2);z-index:9999;animation:slideUp 0.4s ease;';
+                toast.innerHTML = '✅ Message sent! We\'ll get back to you soon.';
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
+                document.getElementById('contactForm').reset();
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+
+    <section class="contact-section">
+        <h1>Contact Us</h1>
+        <p>Our team is ready to help you with anything</p>
+    </section>
+
+    <div class="contact-container">
+        <div class="form-container">
+            <h2>Reach Out to Us!</h2>
+            <p>Got a question about DineSpot? Interested in partnering with us? Have suggestions or just want to say hi?
+                We'd love to hear from you.</p>
+            <form id="contactForm" action="https://sheetdb.io/api/v1/az4kbwpxmlab0" method="POST" target="hidden_iframe"
+                onsubmit="setSubmitted();">
+                <input type="text" id="name" name="data[name]" placeholder="Full Name" required>
+                <input type="email" id="email" name="data[email]" placeholder="Email Address" required>
+                <input type="tel" id="phone" name="data[phone]" placeholder="Phone Number" required>
+                <textarea id="message" name="data[message]" placeholder="Your Message" required></textarea>
+                <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="iframeLoaded();"></iframe>
+        </div>
+        <div class="image-container">
+            <img src="contactus.jpg" alt="Contact DineSpot">
+        </div>
+    </div>
+
+    <script src="footer.js"></script>
+</body>
+
+</html>

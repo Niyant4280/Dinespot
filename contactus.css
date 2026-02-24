@@ -1,0 +1,154 @@
+:root {
+    --gold: #f8b400;
+    --gold-dark: #e0a200;
+    --dark: #1a1d23;
+    --white: #ffffff;
+    --bg: #f5f5f7;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+    --transition: 0.3s ease;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    padding-top: 70px;
+}
+
+/* ===== CONTACT HERO ===== */
+.contact-section {
+    background: linear-gradient(135deg, var(--dark) 0%, #2a2000 100%);
+    padding: 100px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(248, 180, 0, 0.08) 0%, transparent 70%);
+}
+
+.contact-section h1 {
+    font-size: 46px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.contact-section>p {
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.6);
+    position: relative;
+    margin-bottom: 0;
+}
+
+/* ===== CONTACT BODY ===== */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 40px;
+}
+
+/* ===== FORM ===== */
+.form-container h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.form-container>p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+}
+
+#contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#contactForm input,
+#contactForm textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark);
+    background: #fafafa;
+    outline: none;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+    border-color: var(--gold);
+    background: var(--white);
+}
+
+#contactForm textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+#contactForm button[type="submit"] {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color: var(--dark);
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    box-shadow: 0 4px 20px rgba(248, 180, 0, 0.3);
+    align-self: flex-start;
+}
+
+#contactForm button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(248, 180, 0, 0.45);
+}
+
+/* ===== IMAGE ===== */
+.image-container img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    height: 420px;
+}
+
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 24px;
+    }
+
+    .contact-section h1 {
+        font-size: 34px;
+    }
+
+    .image-container img {
+        height: 260px;
+    }
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday &amp; Anniversary Special — DineSpot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --gold: #f8b400;
+      --gold-dark: #e0a200;
+      --dark: #1a1d23;
+      --white: #ffffff;
+      --bg: #f5f5f7;
+      --radius: 16px;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --transition: 0.3s ease;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      padding-top: 70px;
+    }
+
+    /* HERO */
+    .event-hero {
+      background: linear-gradient(135deg, #1a0a2a 0%, #2a1a00 100%);
+      padding: 100px 20px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(248, 180, 0, 0.1) 0%, transparent 65%);
+    }
+
+    .event-hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .event-hero p {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.6);
+      position: relative;
+    }
+
+    /* OFFERS SECTION */
+    .offers-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 1100px;
+      margin: 70px auto;
+      padding: 0 24px;
+    }
+
+    .offer-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+      text-align: center;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14);
+      border-color: var(--gold);
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .offer-card:hover .offer-image img {
+      transform: scale(1.04);
+    }
+
+    .offer-text {
+      padding: 24px 24px 28px;
+    }
+
+    .offer-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .offer-text h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .offer-text p {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .offer-price {
+      display: inline-block;
+      background: rgba(248, 180, 0, 0.12);
+      color: var(--gold-dark);
+      font-size: 22px;
+      font-weight: 700;
+      padding: 6px 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .book-btn {
+      display: block;
+      margin: 0 auto;
+      padding: 12px 32px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      color: var(--dark);
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 16px rgba(248, 180, 0, 0.3);
+      text-decoration: none;
+    }
+
+    .book-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(248, 180, 0, 0.45);
+    }
+
+    @media (max-width: 768px) {
+      .event-hero h1 {
+        font-size: 30px;
+      }
+
+      .offers-section {
+        grid-template-columns: 1fr;
+        max-width: 420px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="navbar.js" defer></script>
+
+  <main>
+    <div class="event-hero">
+      <h1>🎉 Celebrate with DineSpot!</h1>
+      <p>Book a table for your Birthday or Anniversary and enjoy exclusive offers</p>
+    </div>
+
+    <section class="offers-section">
+      <div class="offer-card">
+        <div class="offer-image">
+          <img src="birthday.jpg" alt="Birthday Special">
+        </div>
+        <div class="offer-text">
+          <div class="offer-icon">🎂</div>
+          <h3>Birthday Special</h3>
+          <p>Celebrate your birthday with a complimentary cake, 10% off your total bill, and a personalized table setup!
+          </p>
+          <div class="offer-price">₹500</div>
+          <a href="reservation.html?event=Birthday+Special" class="book-btn">
+            <i class="fas fa-calendar-plus"></i> Book Now
+          </a>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-image">
+          <img src="anniversary.jpg" alt="Anniversary Celebration">
+        </div>
+        <div class="offer-text">
+          <div class="offer-icon">💑</div>
+          <h3>Anniversary Celebration</h3>
+          <p>Celebrate your anniversary with a romantic candlelit dinner, special discount, and a beautiful bouquet!</p>
+          <div class="offer-price">₹800</div>
+          <a href="reservation.html?event=Anniversary+Celebration" class="book-btn">
+            <i class="fas fa-calendar-plus"></i> Book Now
+          </a>
+        </div>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-image">
+          <img src="get together.jpg" alt="Group Celebration">
+        </div>
+        <div class="offer-text">
+          <div class="offer-icon">🥂</div>
+          <h3>Group Celebration</h3>
+          <p>Book for 10 or more people and enjoy a special discount on the total bill, along with complimentary drinks!
+          </p>
+          <div class="offer-price">₹2,000</div>
+          <a href="reservation.html?event=Group+Celebration" class="book-btn">
+            <i class="fas fa-calendar-plus"></i> Book Now
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="footer.js"></script>
+</body>
+
+</html>

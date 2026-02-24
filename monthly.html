@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Subscription — DineSpot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="monthly.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+    <script src="auth-guard.js" defer></script>
+
+    <main>
+        <div class="pricing-hero">
+            <h1>Monthly Plans</h1>
+            <p>Unlock exclusive dining perks with a monthly subscription</p>
+        </div>
+
+        <section class="pricing-section">
+            <h2>Choose Your Plan</h2>
+            <p>Flexible monthly plans for every kind of food lover</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-icon">🍽️</div>
+                    <h3>Standard</h3>
+                    <div class="price">
+                        <div class="amount">₹799</div>
+                        <div class="period">per month</div>
+                    </div>
+                    <p class="plan-desc">Perfect for casual diners who want exclusive access and discounts.</p>
+                    <ul class="features-list">
+                        <li>Priority reservations</li>
+                        <li>5% discount on all bookings</li>
+                        <li>Access to exclusive dishes</li>
+                        <li>Monthly newsletter</li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="location.href='payment.html'">Get Started</button>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-icon">⭐</div>
+                    <h3>Premium</h3>
+                    <div class="price">
+                        <div class="amount">₹1,299</div>
+                        <div class="period">per month</div>
+                    </div>
+                    <p class="plan-desc">For food enthusiasts who want the best dining experience every time.</p>
+                    <ul class="features-list">
+                        <li>Everything in Standard</li>
+                        <li>Free dessert every visit</li>
+                        <li>Early bird event access</li>
+                        <li>10% discount on all bookings</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="location.href='payment.html'">Get Started</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="plan-icon">👑</div>
+                    <h3>VIP</h3>
+                    <div class="price">
+                        <div class="amount">₹1,999</div>
+                        <div class="period">per month</div>
+                    </div>
+                    <p class="plan-desc">The ultimate dining membership with exclusive VIP-only privileges.</p>
+                    <ul class="features-list">
+                        <li>Everything in Premium</li>
+                        <li>Complimentary drink monthly</li>
+                        <li>VIP lounge access</li>
+                        <li>15% discount on all bookings</li>
+                        <li>Personal concierge</li>
+                    </ul>
+                    <button class="subscribe-btn" onclick="location.href='payment.html'">Get Started</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="benefits-section">
+            <h2>Why Subscribe?</h2>
+            <p>Enjoy exclusive perks designed for true food lovers</p>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <img src="benefit1.jpg" alt="Curated meals">
+                    <p>Enjoy curated meals and exclusive offers crafted just for you.</p>
+                </div>
+                <div class="benefit-card">
+                    <img src="benefit2.jpg" alt="New dishes">
+                    <p>Be the first to try new dishes and limited-time menu items.</p>
+                </div>
+                <div class="benefit-card">
+                    <img src="benefit3.jpg" alt="Priority seating">
+                    <p>Priority seating and booking during peak hours — always guaranteed.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="footer.js"></script>
+</body>
+
+</html>

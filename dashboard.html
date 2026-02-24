@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Dine Spot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+
+    <main class="dashboard-main">
+        <!-- Welcome Banner -->
+        <section class="dashboard-hero">
+            <div class="dashboard-hero-content">
+                <div class="avatar-ring">
+                    <img id="profileImage" src="userprofile.jpg" alt="Profile Picture">
+                </div>
+                <div class="hero-text">
+                    <p class="greeting">Good evening,</p>
+                    <h1>Welcome back, <span id="username">User</span>!</h1>
+                    <p class="hero-sub">Manage your reservations and explore dining experiences.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Row -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="stat-info">
+                        <h3>0</h3>
+                        <p>Total Reservations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-utensils"></i></div>
+                    <div class="stat-info">
+                        <h3>0</h3>
+                        <p>Restaurants Visited</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-info">
+                        <h3>0</h3>
+                        <p>Reviews Given</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-crown"></i></div>
+                    <div class="stat-info">
+                        <h3>Free</h3>
+                        <p>Current Plan</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profile & Actions -->
+        <section class="dashboard-content">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <img id="profileImage2" src="userprofile.jpg" alt="Profile">
+                    <div>
+                        <h2 id="userFullName">John Doe</h2>
+                        <span class="badge">Member</span>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <div class="detail-row">
+                        <i class="fas fa-envelope"></i>
+                        <span id="userEmail">niyant.sanja@gmail.com</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fas fa-phone"></i>
+                        <span id="userPhone">+91 9876543210</span>
+                    </div>
+                    <div class="detail-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>India</span>
+                    </div>
+                </div>
+                <button class="logout-btn" onclick="logoutUser()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <div class="quick-actions">
+                <h2>Quick Actions</h2>
+                <div class="actions-grid">
+                    <a href="reservation.html" class="action-card">
+                        <div class="action-icon"><i class="fas fa-calendar-plus"></i></div>
+                        <h3>Make Reservation</h3>
+                        <p>Book a table at your favourite restaurant</p>
+                    </a>
+                    <a href="reservation-history.html" class="action-card">
+                        <div class="action-icon"><i class="fas fa-history"></i></div>
+                        <h3>Reservation History</h3>
+                        <p>View your past and upcoming bookings</p>
+                    </a>
+                    <a href="rooftop.html" class="action-card">
+                        <div class="action-icon"><i class="fas fa-building"></i></div>
+                        <h3>Rooftop Dining</h3>
+                        <p>Enjoy meals with a view</p>
+                    </a>
+                    <a href="monthly.html" class="action-card">
+                        <div class="action-icon"><i class="fas fa-crown"></i></div>
+                        <h3>Upgrade Plan</h3>
+                        <p>Get exclusive perks and priority bookings</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="footer.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

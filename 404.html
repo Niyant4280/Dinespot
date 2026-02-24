@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | DineSpot</title>
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Return to DineSpot.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #f8b400;
+            --gold-dark: #e0a200;
+            --dark: #1a1d23;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Background orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        .orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--gold);
+            top: -100px;
+            left: -100px;
+        }
+
+        .orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #ff6b6b;
+            bottom: -80px;
+            right: -80px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+        }
+
+        /* Big 404 number */
+        .error-number {
+            font-size: clamp(100px, 20vw, 180px);
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -5px;
+        }
+
+        .error-icon {
+            font-size: 52px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark);
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: box-shadow 0.25s;
+            box-shadow: 0 4px 20px rgba(248, 180, 0, 0.3);
+        }
+
+        .btn-home:hover {
+            box-shadow: 0 8px 30px rgba(248, 180, 0, 0.5);
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.25s;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        /* Quick links */
+        .quick-links {
+            margin-top: 48px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .ql {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            font-size: 13px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .ql:hover {
+            background: rgba(248, 180, 0, 0.1);
+            border-color: rgba(248, 180, 0, 0.3);
+            color: var(--gold);
+        }
+
+        .ql i {
+            color: var(--gold);
+        }
+
+        /* Pulse animation on icon */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.08)
+            }
+        }
+
+        .error-icon {
+            animation: pulse 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <div class="container">
+        <span class="error-icon">🍽️</span>
+        <div class="error-number">404</div>
+        <h1>Table Not Found!</h1>
+        <p>Looks like this page took the night off. Don't worry — there are plenty of great spots to explore on
+            DineSpot.</p>
+
+        <div class="action-btns">
+            <a href="index.html" class="btn-home"><i class="fas fa-home"></i> Back to Home</a>
+            <a href="javascript:history.back()" class="btn-back"><i class="fas fa-arrow-left"></i> Go Back</a>
+        </div>
+
+        <div class="quick-links">
+            <a href="reservation.html" class="ql"><i class="fas fa-calendar-check"></i> Reserve a Table</a>
+            <a href="reservation-history.html" class="ql"><i class="fas fa-history"></i> My Bookings</a>
+            <a href="contactus.html" class="ql"><i class="fas fa-headset"></i> Contact Us</a>
+            <a href="faq.html" class="ql"><i class="fas fa-question-circle"></i> FAQ</a>
+        </div>
+    </div>
+</body>
+
+</html>

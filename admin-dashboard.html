@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Dine Spot</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin-dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <!-- ── AUTH GUARD ── -->
+    <script>
+        (function () {
+            var user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (!user) {
+                window.location.replace('login.html?redirect=admin-dashboard.html');
+            } else if (user.role !== 'admin' && user.role !== 'restaurant_owner') {
+                window.location.replace('index.html');
+            }
+        })();
+    </script>
+    <!-- Simple Admin Navbar -->
+    <header class="admin-header">
+        <div class="logo">
+            <a href="index.html">
+                <h1 id="head">DineSpot Admin</h1>
+            </a>
+        </div>
+        <div class="admin-user">
+            <span><i class="fas fa-user-shield"></i> <span id="adminName">Administrator</span></span>
+            <button onclick="logoutAdmin()" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="dashboard-header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h2>Overview</h2>
+                    <p>Real-time analytics and platform performance</p>
+                </div>
+                <!-- Restaurant Filter -->
+                <div class="filter-wrapper">
+                    <select id="restaurantFilter" class="admin-select">
+                        <option value="All Restaurants">All Restaurants</option>
+                        <option disabled>Loading...</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="stats-grid">
+            <div class="stat-card revenue">
+                <div class="stat-icon"><i class="fas fa-rupee-sign"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalRevenue">Wait...</h3>
+                    <p>Total Revenue</p>
+                </div>
+            </div>
+            <div class="stat-card bookings">
+                <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="stat-info">
+                    <h3 id="totalBookings">Wait...</h3>
+                    <p>Total Bookings</p>
+                </div>
+            </div>
+            <div class="stat-card active">
+                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                <div class="stat-info">
+                    <h3 id="topRestaurant">Wait...</h3>
+                    <p>Top Performer</p>
+                </div>
+            </div>
+            <!-- Add Restaurant Action -->
+            <div class="stat-card action" onclick="openAddRestaurantModal()"
+                style="cursor: pointer; border: 2px dashed rgba(255,255,255,0.1);">
+                <div class="stat-icon" style="background: rgba(255,255,255,0.05); color: #fff;"><i
+                        class="fas fa-plus"></i></div>
+                <div class="stat-info">
+                    <h3>Add New</h3>
+                    <p>Restaurant</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Restaurant Modal -->
+        <div id="addRestaurantModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAddRestaurantModal()">&times;</span>
+                <h2>Add New Restaurant</h2>
+                <form id="addRestaurantForm">
+                    <div class="input-group">
+                        <label>Restaurant Name</label>
+                        <input type="text" id="restName" required placeholder="e.g. The Sky High">
+                    </div>
+                    <div class="input-group">
+                        <label>Category</label>
+                        <select id="restCategory" class="admin-select" style="width:100%">
+                            <option value="Cafe">Cafe</option>
+                            <option value="Rooftop">Rooftop</option>
+                            <option value="5 Star">5 Star</option>
+                            <option value="Bar">Bar</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Cover Image URL</label>
+                        <input type="url" id="restImage" required placeholder="https://source.unsplash.com/...">
+                    </div>
+                    <div class="input-group">
+                        <label>Dining Layout Image URL</label>
+                        <input type="url" id="restLayout" required placeholder="https://example.com/layout.jpg">
+                    </div>
+                    <button type="submit" class="btn-submit">Add Restaurant</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Recent Reservations Section -->
+        <div class="reservations-section" style="margin-top: 30px;">
+            <div class="section-header"
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap:wrap; gap:10px;">
+                <h3>Recent Reservations</h3>
+                <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+                    <span id="largeGroupCount"
+                        style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; display: none;">0
+                        Large Group Alerts</span>
+                    <button onclick="exportCSV()"
+                        style="background:rgba(248,180,0,0.15);border:1px solid rgba(248,180,0,0.4);color:#f8b400;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:Poppins,sans-serif;display:flex;align-items:center;gap:6px;">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+            <div class="table-container"
+                style="background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden;">
+                <table id="reservationsTable" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: rgba(255,255,255,0.1); text-align: left;">
+                            <th style="padding: 12px;">Customer</th>
+                            <th style="padding: 12px;">Restaurant</th>
+                            <th style="padding: 12px;">Date/Time</th>
+                            <th style="padding: 12px;">Guests</th>
+                            <th style="padding: 12px;">Status</th>
+                            <th style="padding: 12px;">Total</th>
+                            <th style="padding: 12px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservationsBody">
+                        <tr>
+                            <td colspan="7" style="padding: 20px; text-align: center; color: #888;">Loading
+                                reservations...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Review Management Section -->
+        <div class="reviews-section" style="margin-top: 40px;">
+            <div class="section-header">
+                <h3><i class="fas fa-star" style="color: var(--gold);"></i> Review Management</h3>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Manage customer feedback and
+                    respond to reviews</p>
+            </div>
+            <div id="reviewsContainer" class="reviews-grid">
+                <!-- Reviews will be populated here -->
+                <p style="padding: 20px; text-align: center; color: #888;">Loading reviews...</p>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+            <!-- Monthly Revenue Trend -->
+            <div class="chart-container wide">
+                <h3>Revenue Trend (Last 6 Months)</h3>
+                <div class="chart-wrap">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Restaurant Popularity -->
+            <div class="chart-container">
+                <h3>Most Popular Spots</h3>
+                <div class="chart-wrap">
+                    <canvas id="popularityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Peak Hours -->
+            <div class="chart-container">
+                <h3>Peak Dining Hours</h3>
+                <div class="chart-wrap">
+                    <canvas id="peakHoursChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="auth-guard.js"></script>
+    <script>
+        // Show admin name in header
+        (function () {
+            var user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (user) {
+                var el = document.getElementById('adminName');
+                if (el) el.textContent = user.username || user.email || 'Administrator';
+            }
+        })();
+
+        function logoutAdmin() {
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+    </script>
+    <script src="admin-dashboard.js"></script>
+</body>
+
+</html>

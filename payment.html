@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Payment — DineSpot</title>
+    <meta name="description"
+        content="Complete your DineSpot table reservation with our secure payment gateway. Fast, reliable, and encrypted checkout.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <script src="navbar.js" defer></script>
+
+    <main>
+        <div class="payment-wrapper">
+            <div class="payment-card">
+                <div class="payment-header">
+                    <h2>Complete Your Payment</h2>
+                    <p>Secure checkout — your booking is almost confirmed!</p>
+                </div>
+                <!-- Hold Timer Banner -->
+                <div id="hold-countdown-banner"
+                    style="display:none;background:rgba(231,76,60,0.1);border:1px solid #e74c3c;border-radius:12px;padding:12px;margin-bottom:20px;text-align:center;color:#e74c3c;font-weight:600;">
+                    ⏳ Session expires in: <span id="payment-countdown">05:00</span>
+                </div>
+                <div class="payment-body">
+                    <div id="reservation-summary">
+                        <strong>Loading reservation details...</strong>
+                    </div>
+
+                    <h3>Select Payment Method</h3>
+                    <form id="payment-form">
+                        <div class="payment-methods">
+                            <label class="payment-method-label">
+                                <input type="radio" name="payment-method" value="Credit Card" required>
+                                <span class="method-icon">💳</span>
+                                Credit / Debit Card
+                            </label>
+                            <label class="payment-method-label">
+                                <input type="radio" name="payment-method" value="UPI" required>
+                                <span class="method-icon">📱</span>
+                                UPI (GPay, PhonePe, Paytm)
+                            </label>
+                            <label class="payment-method-label">
+                                <input type="radio" name="payment-method" value="Cash" required>
+                                <span class="method-icon">💵</span>
+                                Pay at Restaurant
+                            </label>
+                        </div>
+                        <button type="submit">
+                            <i class="fas fa-lock"></i> Confirm Reservation
+                        </button>
+                        <div class="secure-badge">
+                            <i class="fas fa-shield-alt"></i> 256-bit SSL encrypted · Payments secured by DineSpot
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="footer.js"></script>
+    <script src="payment.js" defer></script>
+</body>
+
+</html>
