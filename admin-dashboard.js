@@ -349,10 +349,15 @@ async function fetchReservations() {
 
         const data = await res.json();
         let reservations = data.reservations || [];
+        console.log(`Fetched ${reservations.length} reservations from server.`);
 
         // Filter client-side if a restaurant is selected
         if (filter && filter !== 'All Restaurants') {
-            reservations = reservations.filter(r => r.restaurant === filter);
+            const cleanFilter = filter.toLowerCase().trim();
+            reservations = reservations.filter(r =>
+                (r.restaurant || '').toLowerCase().trim() === cleanFilter
+            );
+            console.log(`Filtered to ${reservations.length} for "${filter}"`);
         }
 
         updateReservationsTable(reservations);

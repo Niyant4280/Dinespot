@@ -113,11 +113,14 @@ document.addEventListener('DOMContentLoaded', function () {
             alert(`⚠️ Sorry! Table ${reservationDetails.table} was just booked by someone else. Please go back and select a different table.`);
             return;
           }
-          console.warn('Reserve table warning:', err.error);
+          throw new Error(err.error || 'Server error during reservation');
         }
       } catch (err) {
-        console.warn('Could not reach server to reserve table:', err);
-        // Continue anyway — offline fallback
+        console.error('Reservation failed:', err);
+        alert(`❌ Failed to complete reservation: ${err.message}. Please try again.`);
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        return; // STOP redirection
       }
     }
 
