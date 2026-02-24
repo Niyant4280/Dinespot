@@ -5,10 +5,10 @@
  */
 
 // ── API Configuration ──
-window.isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+window.__dsLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-window.API_BASE_URL = window.isLocal ? 'http://localhost:5000' : '/api';
-window.STATS_API_URL = window.isLocal ? 'http://localhost:5001' : '/api/stats'; // Points directly to function
+window.API_BASE_URL = window.__dsLocal ? 'http://localhost:5000' : '/api';
+window.STATS_API_URL = window.__dsLocal ? 'http://localhost:5001' : '/api/stats'; // Points directly to function
 
 // ── Get current user ──
 window.getUser = function () {

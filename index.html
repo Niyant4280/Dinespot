@@ -670,8 +670,8 @@
                     <button onclick="doSearch()"><i class="fas fa-utensils"></i> Search</button>
                 </div>
 
-                <div class="hero-btns">
-                    <a href="reservation.html" class="btn">Reserve a Table</a>
+                <div class="hero-btns" id="heroControlBtns">
+                    <a href="reservation.html" class="btn" id="heroReserveBtn">Reserve a Table</a>
                     <a href="aboutus.html" class="btn-outline">Learn More</a>
                 </div>
 
@@ -1098,6 +1098,21 @@
                 e.target.reset();
             }, 3000);
         }
+
+        // ─── ADMIN CHECK: Hide Booking UI ───
+        (function () {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            if (user && (user.role === 'admin' || user.role === 'restaurant_owner')) {
+                // Hide Hero button
+                const heroBtn = document.getElementById('heroReserveBtn');
+                if (heroBtn) heroBtn.style.display = 'none';
+
+                // Hide card buttons (Dynamic load waits, so we use a style hack or observer)
+                const style = document.createElement('style');
+                style.textContent = '.rest-book { display: none !important; }';
+                document.head.appendChild(style);
+            }
+        })();
     </script>
 </body>
 

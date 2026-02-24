@@ -1,25 +1,25 @@
 {
     "version": 2,
     "functions": {
-        "api/index.js": {
+        "api/auth/index.js": {
             "runtime": "nodejs20.x"
         },
-        "api/stats.py": {
+        "api/stats/index.py": {
             "runtime": "python3.9"
         }
     },
     "rewrites": [
         {
             "source": "/api/stats/(.*)",
-            "destination": "/api/stats.py"
+            "destination": "/api/stats/index.py"
         },
         {
             "source": "/api/stats",
-            "destination": "/api/stats.py"
+            "destination": "/api/stats/index.py"
         },
         {
             "source": "/api/(.*)",
-            "destination": "/api/index.js"
+            "destination": "/api/auth/index.js"
         }
     ]
 }
