@@ -339,6 +339,14 @@ async function fetchReservations() {
         const res = await fetch(`${window.API_BASE_URL}/admin/reservations`, {
             headers: { 'Authorization': `Bearer ${user.token}` }
         });
+
+        if (res.status === 401) {
+            console.error('Unauthorized - Clearing storage and redirecting');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+            return;
+        }
+
         const data = await res.json();
         let reservations = data.reservations || [];
 
@@ -456,6 +464,13 @@ async function fetchReviews() {
 
     try {
         const res = await fetch(`${window.API_BASE_URL}/reviews/${encodeURIComponent(filter)}`);
+
+        if (res.status === 401) {
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+            return;
+        }
+
         const data = await res.json();
         if (data.reviews) {
             updateReviewsUI(data.reviews);

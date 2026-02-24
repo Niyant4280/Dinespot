@@ -40,12 +40,16 @@ app.use((req, res, next) => {
 function authMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        console.warn(`[Auth] No valid Bearer token found in header: ${authHeader}`);
         return res.status(401).json({ error: 'Unauthorized' });
     }
     try {
-        req.user = jwt.verify(authHeader.split(' ')[1], SECRET_KEY);
+        const token = authHeader.split(' ')[1];
+        req.user = jwt.verify(token, SECRET_KEY);
+        console.log(`[Auth] Verified user: ${req.user.email} (Role: ${req.user.role})`);
         next();
-    } catch {
+    } catch (err) {
+        console.error(`[Auth] JWT Verification failed: ${err.message}`);
         return res.status(401).json({ error: 'Invalid or expired token' });
     }
 }
