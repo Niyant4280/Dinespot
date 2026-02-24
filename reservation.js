@@ -26,17 +26,5 @@ document.getElementById('reservation-form').addEventListener('submit', function 
     localStorage.setItem('reservationDetails', JSON.stringify(reservationDetails));
     window.location.href = 'payment.html';
 });
-fetch(`${window.API_BASE_URL}/reserve`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-        name: "John Doe",
-        date: "2025-03-01",
-        time: "7:00 PM",
-        guests: 4
-    })
-})
-    .then(response => response.json())
-    .then(data => console.log("Reservation added:", data))
-    .catch(error => console.error("Error:", error));
+
 

@@ -142,7 +142,7 @@ async function updateFloorPlanAvailability() {
     updateLayoutVisual(restaurant);
 
     try {
-        const response = await fetch(`${window.API_BASE_URL}/api/table-status?restaurant=${encodeURIComponent(restaurant)}&date=${date}&time=${time}`);
+        const response = await fetch(`${window.API_BASE_URL}/table-status?restaurant=${encodeURIComponent(restaurant)}&date=${date}&time=${time}`);
         if (!response.ok) return;
 
         const data = await response.json();
@@ -274,7 +274,7 @@ async function createHold(tableId) {
     if (!user || !user.token) return;
 
     try {
-        const res = await fetch(`${window.API_BASE_URL}/api/hold-table`, {
+        const res = await fetch(`${window.API_BASE_URL}/hold-table`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

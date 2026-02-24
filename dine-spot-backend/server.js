@@ -32,7 +32,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-const SECRET_KEY = process.env.SECRET_KEY || "fallback_secret_key";
+const SECRET_KEY = process.env.SECRET_KEY || "dinespot_secure_production_secret_2024";
 
 // ─────────────────────────────────────────────
 // AUTH MIDDLEWARE
@@ -142,9 +142,8 @@ app.get("/dashboard", authMiddleware, async (req, res) => {
 });
 
 // ─────────────────────────────────────────────
-// USER PROFILE UPDATE
-// ─────────────────────────────────────────────
-app.put("/api/user/profile", authMiddleware, async (req, res) => {
+// ── USER PROFILE UPDATE ──
+app.put("/user/profile", authMiddleware, async (req, res) => {
   try {
     const { username, email } = req.body;
     const userRef = db.collection("users").doc(req.user.userId);
@@ -162,8 +161,7 @@ app.put("/api/user/profile", authMiddleware, async (req, res) => {
 
 // ─────────────────────────────────────────────
 // SEED TABLES (Utility to ensure tables have capacity)
-// ─────────────────────────────────────────────
-app.post("/api/seed-tables", authMiddleware, async (req, res) => {
+app.post("/seed-tables", authMiddleware, async (req, res) => {
   if (req.user.role !== 'admin') return res.status(403).json({ error: "Only admins can seed" });
   try {
     const tables = [
@@ -278,8 +276,7 @@ app.get("/check-availability", async (req, res) => {
 
 // ─────────────────────────────────────────────
 // HOLD TABLE (5-minute temporary lock)
-// ─────────────────────────────────────────────
-app.post("/api/hold-table", authMiddleware, async (req, res) => {
+app.post("/hold-table", authMiddleware, async (req, res) => {
   try {
     const { tableId, restaurant, date, time, guests } = req.body;
     if (!tableId || !restaurant || !date || !time) {
@@ -520,7 +517,7 @@ app.post("/reviews", authMiddleware, async (req, res) => {
   }
 });
 
-app.get("/api/reviews/:restaurant", async (req, res) => {
+app.get("/reviews/:restaurant", async (req, res) => {
   try {
     const snap = await db.collection("reviews")
       .where("restaurant", "==", req.params.restaurant)
@@ -534,7 +531,7 @@ app.get("/api/reviews/:restaurant", async (req, res) => {
   }
 });
 
-app.post("/api/reviews/:id/respond", authMiddleware, async (req, res) => {
+app.post("/reviews/:id/respond", authMiddleware, async (req, res) => {
   try {
     if (req.user.role !== "admin" && req.user.role !== "restaurant_owner") {
       return res.status(403).json({ error: "Unauthorized" });
@@ -553,7 +550,7 @@ app.post("/api/reviews/:id/respond", authMiddleware, async (req, res) => {
 // ─────────────────────────────────────────────
 // TABLE STATUS — LIVE (aware of date/time)
 // ─────────────────────────────────────────────
-app.get("/api/table-status", async (req, res) => {
+app.get("/table-status", async (req, res) => {
   try {
     const { restaurant, date, time } = req.query;
     if (!restaurant || !date || !time) {
