@@ -44,30 +44,51 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addRestaurantForm').addEventListener('submit', handleAddRestaurant);
 });
 
-/* ─── Fetch Stats from Python API ─────────────── */
+/* ─── Fetch Stats from Node.js API ─────────────── */
 async function fetchStats() {
-    const filter = document.getElementById('restaurantFilter').value;
-    let url = `${window.STATS_API_URL}/stats`;
-    if (filter && filter !== 'All Restaurants') {
-        url += `?restaurant=${encodeURIComponent(filter)}`;
-    }
-
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     try {
-        const res = await fetch(url);
+        const res = await fetch(`${window.API_BASE_URL}/admin/reservations`, {
+            headers: { 'Authorization': `Bearer ${user.token}` }
+        });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
+        const reservations = data.reservations || [];
 
-        if (data.error) {
-            console.error('API error:', data.error);
-            setErrorState();
-            return;
-        }
+        // Build stats from reservations
+        const counts = {};
+        const monthly = {};
+        const hourly = {};
+        let totalRevenue = 0;
+        const restaurantNames = new Set();
 
-        updateKPIs(data);
-        renderCharts(data);
+        reservations.forEach(r => {
+            const rest = r.restaurant || 'Unknown';
+            restaurantNames.add(rest);
+            counts[rest] = (counts[rest] || 0) + 1;
 
-        if (!dropdownPopulated && data.available_restaurants) {
-            populateDropdown(data.available_restaurants);
+            // Revenue
+            const cost = parseFloat((r.totalCost || '0').replace(/[^0-9.]/g, '')) || 0;
+            totalRevenue += cost;
+
+            // Monthly
+            if (r.date) {
+                const month = r.date.substring(0, 7); // YYYY-MM
+                monthly[month] = (monthly[month] || 0) + cost;
+            }
+
+            // Hourly
+            if (r.time) {
+                const hr = r.time.substring(0, 2);
+                hourly[hr] = (hourly[hr] || 0) + 1;
+            }
+        });
+
+        updateKPIs({ total_revenue: totalRevenue, restaurant_counts: counts });
+        renderCharts({ monthly_revenue: monthly, restaurant_counts: counts, hourly_counts: hourly });
+
+        if (!dropdownPopulated) {
+            populateDropdown([...restaurantNames]);
         }
     } catch (err) {
         console.error('Failed to fetch stats:', err);
@@ -305,18 +326,22 @@ async function handleAddRestaurant(e) {
 
 /* ─── Fetch Reservations ────────────────────────── */
 async function fetchReservations() {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     const filter = document.getElementById('restaurantFilter').value;
-    let url = `${window.STATS_API_URL}/reservations`;
-    if (filter && filter !== 'All Restaurants') {
-        url += `?restaurant=${encodeURIComponent(filter)}`;
-    }
 
     try {
-        const res = await fetch(url);
+        const res = await fetch(`${window.API_BASE_URL}/admin/reservations`, {
+            headers: { 'Authorization': `Bearer ${user.token}` }
+        });
         const data = await res.json();
-        if (data.reservations) {
-            updateReservationsTable(data.reservations);
+        let reservations = data.reservations || [];
+
+        // Filter client-side if a restaurant is selected
+        if (filter && filter !== 'All Restaurants') {
+            reservations = reservations.filter(r => r.restaurant === filter);
         }
+
+        updateReservationsTable(reservations);
     } catch (err) {
         console.error('Failed to fetch reservations:', err);
     }
@@ -424,7 +449,7 @@ async function fetchReviews() {
     }
 
     try {
-        const res = await fetch(`${window.API_BASE_URL}/api/reviews/${encodeURIComponent(filter)}`);
+        const res = await fetch(`${window.API_BASE_URL}/reviews/${encodeURIComponent(filter)}`);
         const data = await res.json();
         if (data.reviews) {
             updateReviewsUI(data.reviews);
@@ -483,7 +508,7 @@ window.submitReviewResponse = async function (reviewId) {
 
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     try {
-        const res = await fetch(`${window.API_BASE_URL}/api/reviews/${reviewId}/respond`, {
+        const res = await fetch(`${window.API_BASE_URL}/reviews/${reviewId}/respond`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
