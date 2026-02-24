@@ -13,10 +13,12 @@ header {
     align-items: center;
 }
 
-#home-link {
+#home-link,
+#home-link:hover,
+#head {
+    text-decoration: none !important;
     display: flex;
     align-items: center;
-    text-decoration: none;
     gap: 12px;
 }
 

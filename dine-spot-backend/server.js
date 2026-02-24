@@ -15,7 +15,21 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "..")));
+
+// ── VERCEL / API PATH STRIPPING ──
+// Vercel rewrites often pass the full path (e.g. /api/login) to the function.
+// This middleware ensures our routes (/login, /signup) still match.
+app.use((req, res, next) => {
+  if (req.url.startsWith('/api')) {
+    req.url = req.url.replace('/api', '');
+  }
+  next();
+});
+
+// Only serve static files locally; Vercel handles this in production via vercel.json
+if (process.env.NODE_ENV !== 'production') {
+  app.use(express.static(path.join(__dirname, "..")));
+}
 
 
 const SECRET_KEY = process.env.SECRET_KEY || "fallback_secret_key";

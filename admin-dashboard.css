@@ -37,11 +37,13 @@ body {
     z-index: 100;
 }
 
-.admin-header .logo {
+.admin-header .logo,
+.admin-header .logo:hover,
+.admin-header .logo * {
     display: flex;
     align-items: center;
     gap: 12px;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .admin-header .logo a {

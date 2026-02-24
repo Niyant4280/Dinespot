@@ -67,8 +67,10 @@ header {
   align-items: center;
 }
 
-#home-link {
-  text-decoration: none;
+#home-link,
+#home-link:hover,
+#head {
+  text-decoration: none !important;
 }
 
 #head {

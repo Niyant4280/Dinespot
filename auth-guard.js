@@ -5,13 +5,10 @@
  */
 
 // ── API Configuration ──
-window.API_BASE_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
-    ? 'http://localhost:5000'
-    : '/api'; // Use /api prefix for Vercel routing
+const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-window.STATS_API_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
-    ? 'http://localhost:5001'
-    : '/api/stats'; // Note: Python is mapped to /api/stats in vercel.json
+window.API_BASE_URL = isLocal ? 'http://localhost:5000' : '/api';
+window.STATS_API_URL = isLocal ? 'http://localhost:5001' : '/api/stats';
 
 // ── Get current user ──
 window.getUser = function () {
