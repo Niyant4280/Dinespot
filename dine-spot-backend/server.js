@@ -647,6 +647,10 @@ app.put("/admin/restaurants/:id", authMiddleware, async (req, res) => {
 // START SERVER
 // ─────────────────────────────────────────────
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`✅ DineSpot backend running on http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`✅ DineSpot backend running on http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

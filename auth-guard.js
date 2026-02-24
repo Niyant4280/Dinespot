@@ -5,8 +5,13 @@
  */
 
 // ── API Configuration ──
-window.API_BASE_URL = 'http://localhost:5000';
-window.STATS_API_URL = 'http://localhost:5001'; // Reservation analytics (Python)
+window.API_BASE_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
+    ? 'http://localhost:5000'
+    : ''; // Relative path for production
+
+window.STATS_API_URL = window.location.origin === 'http://localhost:5000' || window.location.origin === 'http://127.0.0.1:5500'
+    ? 'http://localhost:5001'
+    : ''; // Relative path for production
 
 // ── Get current user ──
 window.getUser = function () {

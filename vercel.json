@@ -1,0 +1,17 @@
+{
+    "version": 2,
+    "rewrites": [
+        {
+            "source": "/api/stats/(.*)",
+            "destination": "/dine-spot-backend/dashboard_analytics.py"
+        },
+        {
+            "source": "/api/(.*)",
+            "destination": "/dine-spot-backend/server.js"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/$1"
+        }
+    ]
+}
