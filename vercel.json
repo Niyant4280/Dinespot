@@ -1,13 +1,5 @@
 {
     "version": 2,
-    "functions": {
-        "api/auth/index.js": {
-            "runtime": "nodejs20.x"
-        },
-        "api/stats/index.py": {
-            "runtime": "python3.9"
-        }
-    },
     "rewrites": [
         {
             "source": "/api/stats/(.*)",
