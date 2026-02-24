@@ -1,8 +1,20 @@
 {
     "version": 2,
+    "functions": {
+        "api/index.js": {
+            "runtime": "nodejs20.x"
+        },
+        "api/stats.py": {
+            "runtime": "python3.9"
+        }
+    },
     "rewrites": [
         {
             "source": "/api/stats/(.*)",
+            "destination": "/api/stats.py"
+        },
+        {
+            "source": "/api/stats",
             "destination": "/api/stats.py"
         },
         {

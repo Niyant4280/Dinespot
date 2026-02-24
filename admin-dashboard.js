@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ─── Fetch Stats from Python API ─────────────── */
 async function fetchStats() {
     const filter = document.getElementById('restaurantFilter').value;
-    let url = `${window.STATS_API_URL}/api/stats`;
+    let url = `${window.STATS_API_URL}/stats`;
     if (filter && filter !== 'All Restaurants') {
         url += `?restaurant=${encodeURIComponent(filter)}`;
     }
@@ -306,7 +306,7 @@ async function handleAddRestaurant(e) {
 /* ─── Fetch Reservations ────────────────────────── */
 async function fetchReservations() {
     const filter = document.getElementById('restaurantFilter').value;
-    let url = `${window.STATS_API_URL}/api/reservations`;
+    let url = `${window.STATS_API_URL}/reservations`;
     if (filter && filter !== 'All Restaurants') {
         url += `?restaurant=${encodeURIComponent(filter)}`;
     }
