@@ -3,11 +3,11 @@
     "rewrites": [
         {
             "source": "/api/stats/(.*)",
-            "destination": "/dine-spot-backend/dashboard_analytics.py"
+            "destination": "/api/stats.py"
         },
         {
             "source": "/api/(.*)",
-            "destination": "/dine-spot-backend/server.js"
+            "destination": "/api/index.js"
         }
     ]
 }
